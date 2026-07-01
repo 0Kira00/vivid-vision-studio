@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import heroDesktop from "@/assets/hero-desktop.mp4.asset.json";
-import heroMobile from "@/assets/hero-mobile.mp4.asset.json";
+import heroDesktop from "@/assets/hero-desktop.mp4";
+import heroMobile from "@/assets/hero-mobile.mp4";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -145,12 +145,12 @@ function Hero() {
         <div className="relative aspect-[3/4] w-full md:aspect-[16/9]">
           <video
             className="absolute inset-0 hidden h-full w-full object-cover md:block"
-            src={heroDesktop.url}
+            src={heroDesktop}
             autoPlay muted loop playsInline preload="auto"
           />
           <video
             className="absolute inset-0 block h-full w-full object-cover md:hidden"
-            src={heroMobile.url}
+            src={heroMobile}
             autoPlay muted loop playsInline preload="auto"
           />
 
