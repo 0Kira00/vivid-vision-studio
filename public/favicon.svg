@@ -1,11 +1,9 @@
 <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <rect width="512" height="512" rx="96" fill="#c9f26a"/>
-  <rect x="150" y="106" width="96" height="96" rx="6" fill="#101014"/>
-  <rect x="300" y="140" width="62" height="62" rx="4" fill="#101014"/>
-  <path d="M 66 200
-           A 190 190 0 0 0 446 200
-           L 366 200
-           A 110 110 0 0 1 146 200
-           Z"
-        fill="#101014"/>
+  <rect width="512" height="512" fill="#c9f26a"/>
+  <g transform="translate(166,139) scale(9)">
+    <g transform="translate(10,13) scale(1.22) translate(-10,-13)">
+      <path d="M4 4 L4 20 L8.5 16.5 L11 22 L13.5 21 L11 15.5 L16 15.5 Z" fill="#101014"/>
+    </g>
+    <path d="M4 4 L4 20 L8.5 16.5 L11 22 L13.5 21 L11 15.5 L16 15.5 Z" fill="#ffffff"/>
+  </g>
 </svg>
