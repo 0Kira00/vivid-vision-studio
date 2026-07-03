@@ -11,6 +11,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SITE_URL, SITE_NAME } from "../lib/seo";
+import { TabAttention } from "../components/TabAttention";
 
 function NotFoundComponent() {
   return (
@@ -77,25 +79,43 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Visibilia — Siamo il motivo per cui ti scelgono su Google" },
+      { title: "Visibilia — Agenzia digitale: siti web e SEO locale che ti fanno scegliere su Google" },
       {
         name: "description",
         content:
-          "Agenzia digitale per professionisti che vogliono farsi notare. Siti web, schede Google e identità visiva costruiti per portarti più clic, più chiamate, più clienti.",
+          "Realizziamo siti web, schede Google Business ottimizzate e strategie SEO locali per professionisti. Più visibilità, più chiamate, più clienti. Preventivo gratuito.",
       },
-      { name: "author", content: "Visibilia" },
+      { name: "robots", content: "index, follow" },
+      { name: "author", content: SITE_NAME },
+      { name: "theme-color", content: "#c9f26a" },
+
+      { property: "og:site_name", content: SITE_NAME },
       { property: "og:title", content: "Visibilia — Farsi scegliere su Google" },
       {
         property: "og:description",
         content:
-          "Siti, SEO locale e identità digitali per chi ha smesso di essere il secondo risultato.",
+          "Siti web, schede Google e SEO locale per chi ha smesso di essere il secondo risultato. Scopri i nostri lavori per dentisti, avvocati, ristoranti e altro.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:image", content: `${SITE_URL}/og-image.jpg` },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
+      { property: "og:locale", content: "it_IT" },
+
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Visibilia — Farsi scegliere su Google" },
+      {
+        name: "twitter:description",
+        content: "Siti web, schede Google e SEO locale per professionisti che vogliono farsi notare.",
+      },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.jpg` },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
@@ -111,11 +131,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: SITE_NAME,
+  url: SITE_URL,
+  description:
+    "Agenzia digitale che realizza siti web, schede Google Business ottimizzate e strategie SEO locali per professionisti.",
+  areaServed: "IT",
+  email: "ciao@visibilia.studio",
+};
+
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="it">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
       </head>
       <body>
         {children}
@@ -130,6 +165,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <TabAttention />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
     </QueryClientProvider>

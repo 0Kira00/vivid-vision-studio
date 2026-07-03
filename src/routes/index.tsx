@@ -1,9 +1,28 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import heroDesktop from "@/assets/hero-desktop.mp4";
 import heroMobile from "@/assets/hero-mobile.mp4";
+import { BeforeAfterSlider } from "@/components/before-after-slider";
+import site1Before from "@/assets/site1-before.jpg";
+import site1After from "@/assets/site1-after.jpg";
+import { Calendar, Tag, Search } from "lucide-react";
+import { Reveal } from "@/components/Reveal";
+import { DentalComparison } from "@/components/DentalComparison";
+import { SITE_URL } from "@/lib/seo";
+import { SmoothScroll } from "@/components/SmoothScroll";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Visibilia — Agenzia digitale: siti web e SEO locale che ti fanno scegliere su Google" },
+      {
+        name: "description",
+        content:
+          "Realizziamo siti web, schede Google Business ottimizzate e strategie SEO locali per professionisti. Più visibilità, più chiamate, più clienti. Preventivo gratuito.",
+      },
+    ],
+    links: [{ rel: "canonical", href: SITE_URL }],
+  }),
   component: Index,
 });
 
@@ -81,7 +100,7 @@ const marqueeItems = [
 ];
 
 function Index() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   useEffect(() => {
     document
@@ -90,25 +109,27 @@ function Index() {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
-      {/* Ambient green blobs */}
-      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute -top-20 -left-24 h-[420px] w-[420px] rounded-full bg-lime opacity-40 blur-[120px]" />
-        <div className="absolute top-[35%] -right-32 h-[520px] w-[520px] rounded-full bg-lime-deep opacity-25 blur-[140px]" />
-        <div className="absolute bottom-0 left-1/3 h-[380px] w-[380px] rounded-full bg-lime-soft opacity-50 blur-[130px]" />
-      </div>
+    <SmoothScroll>
+      <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
+        {/* Ambient green blobs */}
+        <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
+          <div className="absolute -top-20 -left-24 h-[420px] w-[420px] rounded-full bg-lime opacity-40 blur-[120px]" />
+          <div className="absolute top-[35%] -right-32 h-[520px] w-[520px] rounded-full bg-lime-deep opacity-25 blur-[140px]" />
+          <div className="absolute bottom-0 left-1/3 h-[380px] w-[380px] rounded-full bg-lime-soft opacity-50 blur-[130px]" />
+        </div>
 
-      <Nav />
-      <Hero />
-      <ResultsStrip />
-      <Marquee />
-      <Services />
-      <PrimaDopo />
-      <MilionDollar />
-      <Faq openFaq={openFaq} setOpenFaq={setOpenFaq} />
-      <Contact />
-      <Footer />
-    </div>
+        <Nav />
+        <Hero />
+        <ResultsStrip />
+        <Marquee />
+        <Services />
+        <PrimaDopo />
+        <MilionDollar />
+        <Faq openFaq={openFaq} setOpenFaq={setOpenFaq} />
+        <Contact />
+        <Footer />
+      </div>
+    </SmoothScroll>
   );
 }
 
@@ -146,11 +167,13 @@ function Hero() {
           <video
             className="absolute inset-0 hidden h-full w-full object-cover md:block"
             src={heroDesktop}
+            poster="/hero-desktop-poster.jpg"
             autoPlay muted loop playsInline preload="auto"
           />
           <video
             className="absolute inset-0 block h-full w-full object-cover md:hidden"
             src={heroMobile}
+            poster="/hero-mobile-poster.jpg"
             autoPlay muted loop playsInline preload="auto"
           />
 
@@ -185,14 +208,14 @@ function Hero() {
                   href="#contatti"
                   className="group inline-flex items-center gap-2 rounded-full bg-lime px-5 py-3 text-sm font-semibold text-ink shadow-[0_10px_30px_-10px_var(--lime-deep)] transition hover:bg-lime-deep"
                 >
-                  Voglio essere il primo
+                  Voglio un sito nuovo
                   <span className="transition group-hover:translate-x-0.5" aria-hidden>↗</span>
                 </a>
                 <a
-                  href="#cosa-facciamo"
+                  href="#prima-dopo"
                   className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-md transition hover:bg-white/20"
                 >
-                  Scopri come lavoriamo
+                  Voglio migliorare il mio sito
                 </a>
               </div>
             </div>
@@ -216,25 +239,24 @@ function ResultsStrip() {
       {/* Mobile: horizontal snap-scroll. Desktop: 4-col grid. */}
       <div className="no-scrollbar -mx-2 flex snap-x snap-mandatory gap-3 overflow-x-auto px-2 md:mx-0 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:px-0">
         {results.map((r, i) => (
-          <div
-            key={i}
-            className="group relative min-w-[240px] flex-shrink-0 snap-start overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-[0_10px_40px_-25px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 md:min-w-0"
-          >
-            <div
-              aria-hidden
-              className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-lime opacity-30 blur-2xl transition group-hover:opacity-60"
-            />
-            <div className="relative flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-ink-soft">
-              <span className="grid h-5 w-5 place-items-center rounded-full bg-lime text-ink">
-                {r.icon}
-              </span>
-              {r.label}
+          <Reveal key={i} delay={i * 80} className="min-w-[240px] flex-shrink-0 snap-start md:min-w-0">
+            <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-[0_10px_40px_-25px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5">
+              <div
+                aria-hidden
+                className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-lime opacity-30 blur-2xl transition group-hover:opacity-60"
+              />
+              <div className="relative flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-ink-soft">
+                <span className="grid h-5 w-5 place-items-center rounded-full bg-lime text-ink">
+                  {r.icon}
+                </span>
+                {r.label}
+              </div>
+              <div className="relative mt-3 font-display text-3xl leading-none tabular-nums">
+                {r.headline}
+              </div>
+              <div className="relative mt-2 text-xs text-muted-foreground">{r.note}</div>
             </div>
-            <div className="relative mt-3 font-display text-3xl leading-none tabular-nums">
-              {r.headline}
-            </div>
-            <div className="relative mt-2 text-xs text-muted-foreground">{r.note}</div>
-          </div>
+          </Reveal>
         ))}
       </div>
     </section>
@@ -265,7 +287,8 @@ function Services() {
   const [active, setActive] = useState(0);
 
   return (
-    <section id="cosa-facciamo" className="mx-auto w-[min(96%,1280px)] py-24 md:py-32">
+    <section id="cosa-facciamo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
+      <SectionGhostNumber n="01" />
       <div className="flex items-end justify-between gap-8">
         <div>
           <SectionLabel>/ 01 — Cosa facciamo</SectionLabel>
@@ -282,6 +305,7 @@ function Services() {
       {/* Interactive list + preview panel */}
       <div className="mt-14 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
         {/* LEFT: list */}
+        <Reveal>
         <ul className="divide-y divide-border overflow-hidden rounded-3xl border border-border bg-card">
           {services.map((s, i) => {
             const isActive = active === i;
@@ -320,9 +344,10 @@ function Services() {
             );
           })}
         </ul>
+        </Reveal>
 
         {/* RIGHT: preview panel */}
-        <div className="relative overflow-hidden rounded-3xl bg-ink p-8 text-background md:p-10">
+        <Reveal delay={120} className="relative overflow-hidden rounded-3xl bg-ink p-8 text-background md:p-10">
           <div
             aria-hidden
             className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-lime opacity-25 blur-3xl"
@@ -360,7 +385,7 @@ function Services() {
               <MiniStat k="Rating medio" v="4,9" />
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -384,294 +409,137 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-/* ---------- PRIMA & DOPO — interactive slider ---------- */
-
-function PrimaDopo() {
-  const [pos, setPos] = useState(52);
-  const wrap = useRef<HTMLDivElement | null>(null);
-
-  const handleMove = (clientX: number) => {
-    const el = wrap.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const p = ((clientX - r.left) / r.width) * 100;
-    setPos(Math.max(6, Math.min(94, p)));
-  };
-
+function SectionGhostNumber({ n }: { n: string }) {
   return (
-    <section id="prima-dopo" className="mx-auto w-[min(96%,1280px)] py-24 md:py-32">
-      <SectionLabel>/ 02 — Prima & Dopo</SectionLabel>
-      <div className="mt-5 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-        <h2 className="max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-          Stessa attività.{" "}
-          <span className="font-serif-i">Un altro mondo</span> su Google.
-        </h2>
-        <p className="max-w-sm text-ink-soft">
-          Trascina la maniglia per vedere il cambio: scheda vuota, foto sbiadite, zero
-          recensioni → un profilo che vende da solo.
-        </p>
-      </div>
-
-      <div
-        ref={wrap}
-        className="relative mt-10 aspect-[16/10] w-full cursor-ew-resize select-none overflow-hidden rounded-3xl border border-border bg-card shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)]"
-        onMouseMove={(e) => handleMove(e.clientX)}
-        onTouchMove={(e) => handleMove(e.touches[0].clientX)}
-      >
-        {/* AFTER (background — full) */}
-        <FakeGoogleCard variant="after" />
-
-        {/* BEFORE (clipped) */}
-        <div
-          className="absolute inset-0 overflow-hidden"
-          style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
-        >
-          <FakeGoogleCard variant="before" />
-        </div>
-
-        {/* Divider handle */}
-        <div
-          className="absolute top-0 bottom-0 z-20 w-[2px] bg-lime shadow-[0_0_20px_var(--lime)]"
-          style={{ left: `${pos}%` }}
-        >
-          <div className="absolute top-1/2 left-1/2 grid h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border-2 border-lime bg-ink text-lime shadow-xl">
-            ⇔
-          </div>
-        </div>
-
-        {/* Labels */}
-        <span className="absolute left-4 top-4 z-30 rounded-full bg-ink/85 px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-white/90 backdrop-blur">
-          Prima
-        </span>
-        <span className="absolute right-4 top-4 z-30 rounded-full bg-lime px-3 py-1 text-[11px] uppercase tracking-[0.14em] text-ink">
-          Dopo
-        </span>
-      </div>
-    </section>
+    <span
+      aria-hidden
+      className="pointer-events-none absolute -left-6 top-0 -z-10 hidden select-none font-display text-[240px] leading-none text-ink/[0.04] md:-left-10 md:block md:text-[320px]"
+    >
+      {n}
+    </span>
   );
 }
 
-function FakeGoogleCard({ variant }: { variant: "before" | "after" }) {
-  const before = variant === "before";
+/* ---------- PRIMA & DOPO — interactive slider ---------- */
+
+const primaDopoHighlights = [
+  { icon: Calendar, label: "Prenotazione online" },
+  { icon: Tag, label: "Prezzi sempre visibili" },
+  { icon: Search, label: "+180% chiamate da Google" },
+];
+
+const primaDopoCallouts = [
+  { label: "Prenotazione online", side: "top-4 left-4", delay: "0s" },
+  { label: "Foto professionali", side: "top-4 right-4", delay: "0.3s" },
+  { label: "SEO migliorata", side: "bottom-4 left-4", delay: "0.6s" },
+];
+
+function PrimaDopo() {
   return (
-    <div
-      className={`absolute inset-0 flex flex-col ${
-        before ? "bg-[oklch(0.94_0.005_95)]" : "bg-white"
-      }`}
-    >
-      {/* Fake cover */}
-      <div
-        className={`relative h-1/2 w-full ${
-          before
-            ? "bg-gradient-to-br from-[oklch(0.75_0.02_95)] to-[oklch(0.55_0.02_95)] grayscale"
-            : "bg-gradient-to-br from-lime-soft via-lime to-lime-deep"
-        }`}
-      >
-        <div className="absolute inset-0 opacity-30 mix-blend-overlay [background-image:radial-gradient(circle_at_30%_30%,white_1px,transparent_1px)] [background-size:14px_14px]" />
+    <section id="prima-dopo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
+      <SectionGhostNumber n="02" />
+      <div className="mx-auto max-w-2xl text-center">
+        <SectionLabel>/ 02 — Prima & Dopo</SectionLabel>
+        <h2 className="mx-auto mt-5 font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
+          Stessa attività.{" "}
+          <span className="font-serif-i">Un altro mondo</span> su Google.
+        </h2>
+        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
+          Trascina la maniglia per vedere il cambio: sito vecchio, foto sbiadite → un
+          design che vende da solo.
+        </p>
       </div>
-      {/* Content */}
-      <div className="flex flex-1 flex-col justify-between p-5 md:p-8">
-        <div>
-          <div className="font-display text-lg md:text-2xl">Studio Bellezza · Milano</div>
-          <div className="mt-1 flex items-center gap-2 text-sm">
-            {before ? (
-              <>
-                <span className="text-ink-soft">—</span>
-                <span className="text-ink-soft">Nessuna recensione</span>
-              </>
-            ) : (
-              <>
-                <span className="font-semibold text-ink">4,9</span>
-                <span className="text-lime-deep">★★★★★</span>
-                <span className="text-ink-soft">· 187 recensioni</span>
-              </>
-            )}
+
+      <div className="mt-14 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
+        <div className="rounded-3xl border border-border bg-card p-3 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] md:p-4">
+          <div className="group relative">
+            <BeforeAfterSlider
+              beforeSrc={site1Before}
+              afterSrc={site1After}
+              beforeAlt="Sito prima del restyling"
+              afterAlt="Sito dopo il restyling"
+            />
+            {primaDopoCallouts.map((c) => (
+              <span
+                key={c.label}
+                className={`callout-pop pointer-events-none absolute ${c.side} z-20 hidden items-center gap-1.5 rounded-full bg-lime px-3 py-1.5 text-[11px] font-semibold text-ink shadow-lg md:inline-flex`}
+                style={{ animationDelay: c.delay }}
+              >
+                <span aria-hidden>↗</span>
+                {c.label}
+              </span>
+            ))}
           </div>
-          <div className="mt-3 text-xs text-ink-soft md:text-sm">
-            {before
-              ? "Parrucchiere · Chiuso · Nessun sito web"
-              : "Parrucchiere · Aperto · Aggiornato oggi"}
+
+          <div className="mt-4 flex flex-col items-center gap-5 px-2">
+            <p className="text-center text-xs text-ink-soft md:text-sm">
+              Trascina il cursore centrale · lo stesso brand, un nuovo motore di crescita
+            </p>
+            <Link
+              to="/lavori"
+              className="inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink shadow-[0_10px_30px_-10px_var(--lime-deep)] transition hover:bg-lime-deep"
+            >
+              Visualizza tutti i nostri lavori
+              <span aria-hidden>→</span>
+            </Link>
           </div>
+
         </div>
 
-        <div className="mt-4 grid grid-cols-3 gap-2">
-          {["Chiamate", "Ricerche", "Sito"].map((k, i) => (
-            <div
-              key={k}
-              className={`rounded-xl border p-3 text-center ${
-                before
-                  ? "border-border bg-muted/40 text-ink-soft"
-                  : "border-lime-deep/30 bg-lime-soft/50"
-              }`}
-            >
-              <div className="font-display text-lg md:text-xl">
-                {before ? "3" : i === 0 ? "412" : i === 1 ? "2,1K" : "890"}
-              </div>
-              <div className="text-[10px] uppercase tracking-wider">{k}</div>
-            </div>
-          ))}
+        <div className="flex flex-col justify-between rounded-3xl bg-ink p-8 text-background md:p-10">
+          <div>
+            <p className="text-xs uppercase tracking-[0.16em] text-lime">Cosa cambia</p>
+            <h3 className="mt-3 font-display text-3xl leading-tight md:text-4xl">
+              Non un sito più bello. <span className="font-serif-i">Un sito che lavora.</span>
+            </h3>
+
+            <ul className="mt-8 space-y-4">
+              {primaDopoHighlights.map((h) => (
+                <li
+                  key={h.label}
+                  className="flex items-center gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
+                    <h.icon className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="text-sm md:text-base">{h.label}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <a
+            href="#contatti"
+            className="mt-8 inline-flex items-center justify-between gap-2 rounded-full bg-lime px-5 py-3 text-sm font-semibold text-ink transition hover:bg-lime-deep"
+          >
+            Voglio un sito così
+            <span>→</span>
+          </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
 /* ---------- LA DOMANDA DA UN MILIONE ---------- */
 
 function MilionDollar() {
-  const [pick, setPick] = useState<"a" | "b" | null>(null);
-
   return (
-    <section className="mx-auto w-[min(96%,1280px)] py-24 md:py-32">
+    <section className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
+      <SectionGhostNumber n="03" />
       <SectionLabel>/ 03 — La domanda da un milione</SectionLabel>
       <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
         <span className="font-serif-i">Da chi</span> andresti?
       </h2>
       <p className="mt-4 max-w-xl text-ink-soft">
-        Sei a Milano, cerchi "parrucchiere vicino a me". Ecco i primi due risultati.
-        Scegli tu.
+        Sei a Milano, cerchi "dentista vicino a me". Ecco i primi due risultati.
+        Tocca le schede e scegli tu.
       </p>
 
-      <div className="mt-12 grid gap-5 md:grid-cols-2">
-        <ChoiceCard
-          side="a"
-          picked={pick === "a"}
-          onPick={() => setPick("a")}
-          title="Salone Rossi"
-          meta="Nessuna recensione · 0 foto · sito rotto"
-          points={[
-            "Numero di telefono errato",
-            "Orari non aggiornati",
-            "Ultima recensione: mai",
-          ]}
-          score="1,2"
-          scoreLabel="Fiducia percepita"
-        />
-        <ChoiceCard
-          side="b"
-          picked={pick === "b"}
-          onPick={() => setPick("b")}
-          highlight
-          title="Studio Bellezza"
-          meta="4,9 · 187 recensioni · 62 foto"
-          points={[
-            "Foto professionali dello staff",
-            "Risposte a tutte le recensioni",
-            "Prenotazione in 1 clic",
-          ]}
-          score="9,7"
-          scoreLabel="Fiducia percepita"
-        />
-      </div>
-
-      <div
-        className={`mt-8 overflow-hidden rounded-2xl border transition-all duration-500 ${
-          pick
-            ? "border-lime-deep bg-lime-soft/60 opacity-100"
-            : "max-h-0 border-transparent opacity-0"
-        }`}
-      >
-        {pick && (
-          <div className="flex flex-wrap items-center justify-between gap-4 p-5">
-            <div>
-              <div className="text-xs uppercase tracking-[0.14em] text-ink-soft">
-                Il 96% delle persone sceglie come te
-              </div>
-              <div className="mt-1 font-display text-xl">
-                {pick === "b"
-                  ? "Ecco perché la tua scheda Google conta più del tuo biglietto da visita."
-                  : "Domanda: la tua scheda oggi assomiglia più al Salone Rossi o allo Studio Bellezza?"}
-              </div>
-            </div>
-            <a
-              href="#contatti"
-              className="rounded-full bg-ink px-5 py-3 text-sm font-medium text-background transition hover:bg-ink/85"
-            >
-              Fai la scelta giusta →
-            </a>
-          </div>
-        )}
-      </div>
+      <Reveal>
+        <DentalComparison />
+      </Reveal>
     </section>
-  );
-}
-
-function ChoiceCard({
-  side,
-  title,
-  meta,
-  points,
-  score,
-  scoreLabel,
-  highlight,
-  picked,
-  onPick,
-}: {
-  side: "a" | "b";
-  title: string;
-  meta: string;
-  points: string[];
-  score: string;
-  scoreLabel: string;
-  highlight?: boolean;
-  picked: boolean;
-  onPick: () => void;
-}) {
-  return (
-    <button
-      onClick={onPick}
-      className={`group relative overflow-hidden rounded-3xl border p-7 text-left transition duration-300 hover:-translate-y-1 ${
-        picked
-          ? "border-lime-deep shadow-[0_25px_60px_-30px_var(--lime-deep)]"
-          : "border-border"
-      } ${highlight ? "bg-card" : "bg-muted/40"}`}
-    >
-      <div className="flex items-center justify-between">
-        <span className="text-xs uppercase tracking-[0.16em] text-ink-soft">
-          Opzione {side.toUpperCase()}
-        </span>
-        {highlight && (
-          <span className="rounded-full bg-lime px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink">
-            Consigliato dagli utenti
-          </span>
-        )}
-      </div>
-      <h3 className="mt-4 font-display text-3xl">{title}</h3>
-      <div className="mt-1 text-sm text-ink-soft">{meta}</div>
-
-      <ul className="mt-6 space-y-2 text-sm">
-        {points.map((p) => (
-          <li key={p} className="flex items-start gap-2">
-            <span
-              className={`mt-1 h-1.5 w-1.5 shrink-0 rounded-full ${
-                highlight ? "bg-lime-deep" : "bg-ink/40"
-              }`}
-            />
-            {p}
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-8 flex items-end justify-between border-t border-border pt-4">
-        <div>
-          <div className="text-[11px] uppercase tracking-[0.14em] text-ink-soft">
-            {scoreLabel}
-          </div>
-          <div className="font-display text-4xl tabular-nums">
-            {score}<span className="text-lg text-ink-soft">/10</span>
-          </div>
-        </div>
-        <span
-          className={`grid h-11 w-11 place-items-center rounded-full border transition ${
-            picked
-              ? "border-lime-deep bg-lime text-ink"
-              : "border-border text-ink-soft group-hover:border-ink"
-          }`}
-        >
-          {picked ? "✓" : "→"}
-        </span>
-      </div>
-    </button>
   );
 }
 
@@ -684,8 +552,23 @@ function Faq({
   openFaq: number | null;
   setOpenFaq: (n: number | null) => void;
 }) {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
   return (
-    <section id="faq" className="mx-auto w-[min(96%,1280px)] py-24 md:py-32">
+    <section id="faq" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <SectionGhostNumber n="04" />
       <div className="grid gap-14 lg:grid-cols-[380px_1fr] lg:gap-20">
         <div>
           <SectionLabel>/ 04 — FAQ</SectionLabel>
