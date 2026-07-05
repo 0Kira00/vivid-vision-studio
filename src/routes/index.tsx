@@ -438,17 +438,15 @@ function PrimaDopo() {
   return (
     <section id="prima-dopo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
       <SectionGhostNumber n="02" />
-      <div className="mx-auto max-w-2xl text-center">
-        <SectionLabel>/ 02 — Prima & Dopo</SectionLabel>
-        <h2 className="mx-auto mt-5 font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
-          Stessa attività.{" "}
-          <span className="font-serif-i">Un altro mondo</span> su Google.
-        </h2>
-        <p className="mx-auto mt-5 max-w-xl text-ink-soft">
-          Trascina la maniglia per vedere il cambio: sito vecchio, foto sbiadite → un
-          design che vende da solo.
-        </p>
-      </div>
+      <SectionLabel>/ 02 — Prima & Dopo</SectionLabel>
+      <h2 className="mt-5 max-w-3xl font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
+        Stessa attività.{" "}
+        <span className="font-serif-i">Un altro mondo</span> su Google.
+      </h2>
+      <p className="mt-5 max-w-xl text-ink-soft">
+        Trascina la maniglia per vedere il cambio: sito vecchio, foto sbiadite → un
+        design che vende da solo.
+      </p>
 
       <div className="mt-14 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
         <div className="rounded-3xl border border-border bg-card p-3 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] md:p-4">
