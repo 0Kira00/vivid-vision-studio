@@ -111,13 +111,6 @@ function Index() {
   return (
     <SmoothScroll>
       <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
-        {/* Ambient green blobs */}
-        <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
-          <div className="absolute -top-20 -left-24 h-[420px] w-[420px] rounded-full bg-lime opacity-40 blur-[120px]" />
-          <div className="absolute top-[35%] -right-32 h-[520px] w-[520px] rounded-full bg-lime-deep opacity-25 blur-[140px]" />
-          <div className="absolute bottom-0 left-1/3 h-[380px] w-[380px] rounded-full bg-lime-soft opacity-50 blur-[130px]" />
-        </div>
-
         <Nav />
         <Hero />
         <ResultsStrip />
@@ -606,11 +599,13 @@ function Faq({
                   </span>
                 </button>
                 <div
-                  className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
-                    open ? "max-h-96 pb-6 opacity-100" : "max-h-0 opacity-0"
+                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
+                    open ? "grid-rows-[1fr] pb-6 opacity-100" : "grid-rows-[0fr] opacity-0"
                   }`}
                 >
-                  <p className="max-w-2xl pl-9 text-ink-soft">{f.a}</p>
+                  <div className="overflow-hidden">
+                    <p className="max-w-2xl pl-9 text-ink-soft">{f.a}</p>
+                  </div>
                 </div>
               </li>
             );
