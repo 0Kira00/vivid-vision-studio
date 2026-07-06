@@ -7,7 +7,7 @@ import site1Before from "@/assets/site1-before.jpg";
 import site1After from "@/assets/site1-after.jpg";
 import { Calendar, Tag, Search } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
-import { DentalComparison } from "@/components/DentalComparison";
+import { ProfessionCompare } from "@/components/ProfessionCompare";
 import { SITE_URL } from "@/lib/seo";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
@@ -530,13 +530,15 @@ function MilionDollar() {
         <span className="font-serif-i">Da chi</span> andresti?
       </h2>
       <p className="mt-4 max-w-xl text-ink-soft">
-        Sei a Milano, cerchi "dentista vicino a me". Ecco i primi due risultati.
-        Tocca le schede e scegli tu.
+        Bastano 3 secondi perché un cliente decida chi chiamare e chi ignorare.
+        In quei 3 secondi, la tua scheda deve distinguersi dalla concorrenza.
       </p>
 
-      <Reveal>
-        <DentalComparison />
-      </Reveal>
+      <div className="mt-16">
+        <Reveal>
+          <ProfessionCompare />
+        </Reveal>
+      </div>
     </section>
   );
 }
@@ -604,13 +606,11 @@ function Faq({
                   </span>
                 </button>
                 <div
-                  className={`grid overflow-hidden transition-all duration-300 ${
-                    open ? "grid-rows-[1fr] pb-6" : "grid-rows-[0fr]"
+                  className={`overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out ${
+                    open ? "max-h-96 pb-6 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <div className="min-h-0">
-                    <p className="max-w-2xl pl-9 text-ink-soft">{f.a}</p>
-                  </div>
+                  <p className="max-w-2xl pl-9 text-ink-soft">{f.a}</p>
                 </div>
               </li>
             );

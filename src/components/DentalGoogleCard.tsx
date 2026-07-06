@@ -1,18 +1,33 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Phone, MapPin, Clock, Globe, Bookmark, Navigation, Star, Calendar, Euro } from "lucide-react";
+import { Phone, MapPin, Clock, Globe, Bookmark, Navigation, Star, Signal, Wifi, BatteryFull, type LucideIcon } from "lucide-react";
 
 type Variant = "before" | "after";
+
+export type CardBadge = {
+  icon: LucideIcon;
+  label: string;
+  sub: string;
+  bg: string;
+  fg?: string;
+};
 
 interface GoogleCardProps {
   variant: Variant;
   businessName?: string;
   category?: string;
   address?: string;
+  website?: string;
   rating?: { before: number; after: number };
   reviews?: { before: number; after: number };
   photos?: string[];
   reviewSnippet?: { before: string; after: string };
+  reviewerBefore?: string;
+  reviewerAfter?: string;
+  hoursBefore?: string;
+  hoursAfter?: string;
+  openAfter?: boolean;
   showBadges?: boolean;
+  badges?: CardBadge[];
 }
 
 function Stars({ value }: { value: number }) {
@@ -25,7 +40,7 @@ function Stars({ value }: { value: number }) {
         return (
           <Star
             key={i}
-            className={`h-3 w-3 ${filled ? "fill-lime-deep text-lime-deep" : "fill-black/10 text-black/10"}`}
+            className={`h-3 w-3 ${filled ? "fill-[#fbbc04] text-[#fbbc04]" : "fill-black/10 text-black/10"}`}
           />
         );
       })}
@@ -33,11 +48,16 @@ function Stars({ value }: { value: number }) {
   );
 }
 
+const DEFAULT_BADGES: CardBadge[] = [
+  { icon: Phone, label: "Prenota", sub: "Online 24/7", bg: "#1a73e8" },
+];
+
 export function DentalGoogleCard({
   variant,
   businessName = "Studio Dentistico Ferrari",
   category = "Studio dentistico",
   address = "Via Manzoni 24, Milano",
+  website = "www.studioferrari-dentista.it",
   rating = { before: 3.1, after: 4.9 },
   reviews = { before: 8, after: 342 },
   photos = [],
@@ -45,7 +65,13 @@ export function DentalGoogleCard({
     before: "Impossibile capire gli orari, chiamato ma nessuno risponde.",
     after: "Prenotato online in 30 secondi, staff professionale e ambiente moderno.",
   },
+  reviewerBefore = "Utente",
+  reviewerAfter = "Laura M.",
+  hoursBefore = "Orari non disponibili",
+  hoursAfter = "Chiude alle 19:00",
+  openAfter = true,
   showBadges = true,
+  badges = DEFAULT_BADGES,
 }: GoogleCardProps) {
   const isAfter = variant === "after";
   const link = "#1a73e8";
@@ -55,10 +81,10 @@ export function DentalGoogleCard({
       {/* Status bar mock */}
       <div className="flex items-center justify-between px-6 pt-3 pb-1 text-[11px] font-semibold text-[#202124]">
         <span>9:41</span>
-        <span className="flex items-center gap-1">
-          <span className="h-2 w-3 rounded-sm bg-current opacity-80" />
-          <span className="h-2 w-1 rounded-sm bg-current opacity-80" />
-          <span className="h-2 w-4 rounded-sm border border-current" />
+        <span className="flex items-center gap-1.5">
+          <Signal className="h-3 w-3" strokeWidth={2.5} />
+          <Wifi className="h-3 w-3" strokeWidth={2.5} />
+          <BatteryFull className="h-3.5 w-3.5" strokeWidth={2} />
         </span>
       </div>
 
@@ -125,21 +151,17 @@ export function DentalGoogleCard({
 
       {/* Action row */}
       <div className="mx-5 mt-4 grid grid-cols-4 gap-1 border-y border-black/5 py-3">
-        <AnimatePresence>
-          {isAfter && (
-            <motion.div
-              key="web"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center gap-1"
-            >
-              <div className="grid h-8 w-8 place-items-center rounded-full bg-lime">
-                <Globe className="h-3.5 w-3.5 text-ink" />
-              </div>
-              <span className="text-[9px] font-medium text-ink">Sito</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <motion.div
+          key="web"
+          initial={false}
+          animate={{ opacity: isAfter ? 1 : 0 }}
+          className={`flex flex-col items-center gap-1 ${isAfter ? "" : "pointer-events-none"}`}
+        >
+          <div className="grid h-8 w-8 place-items-center rounded-full bg-[#1a73e8]/10">
+            <Globe className="h-3.5 w-3.5" style={{ color: link }} />
+          </div>
+          <span className="text-[9px] font-medium" style={{ color: link }}>Sito</span>
+        </motion.div>
         {[
           { icon: Navigation, label: "Percorso" },
           { icon: Bookmark, label: "Salva" },
@@ -164,62 +186,55 @@ export function DentalGoogleCard({
           <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#70757a]" />
           <span className="text-[#202124]">
             {isAfter ? (
-              <><span className="font-medium text-lime-deep">Aperto</span> · Chiude alle 19:00</>
+              openAfter ? (
+                <><span className="font-medium text-green-500">Aperto</span> · {hoursAfter}</>
+              ) : (
+                <><span className="font-medium text-red-500">Chiuso</span> · {hoursAfter}</>
+              )
             ) : (
-              <span className="text-[#70757a]">Orari non disponibili</span>
+              <span className="text-[#70757a]">{hoursBefore}</span>
             )}
           </span>
         </div>
-        <AnimatePresence>
-          {isAfter && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              className="flex items-start gap-3"
-            >
-              <Globe className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#70757a]" />
-              <span style={{ color: link }}>www.studioferrari-dentista.it</span>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <motion.div
+          initial={false}
+          animate={{ opacity: isAfter ? 1 : 0 }}
+          className={`flex items-start gap-3 ${isAfter ? "" : "pointer-events-none"}`}
+        >
+          <Globe className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#70757a]" />
+          <span style={{ color: link }}>{website}</span>
+        </motion.div>
       </div>
 
       {/* Badges */}
-      <AnimatePresence>
-        {isAfter && showBadges && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mx-5 mt-4 grid grid-cols-2 gap-2"
-          >
-            <div className="flex items-center gap-2 rounded-xl bg-black/[0.03] p-2.5">
-              <div className="grid h-7 w-7 place-items-center rounded-full bg-lime text-ink">
-                <Calendar className="h-3.5 w-3.5" />
+      {showBadges && (
+        <motion.div
+          initial={false}
+          animate={{ opacity: isAfter ? 1 : 0 }}
+          className={`mx-5 mt-4 grid gap-2 ${badges.length > 1 ? "grid-cols-2" : "grid-cols-1"} ${isAfter ? "" : "pointer-events-none"}`}
+        >
+          {badges.map((b) => (
+            <div key={b.label} className="flex items-center gap-2 rounded-xl bg-black/[0.03] p-2.5">
+              <div
+                className="grid h-7 w-7 shrink-0 place-items-center rounded-full"
+                style={{ backgroundColor: b.bg, color: b.fg ?? "#ffffff" }}
+              >
+                <b.icon className="h-3.5 w-3.5" />
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] font-semibold text-[#202124]">Prenota</div>
-                <div className="truncate text-[9px] text-[#70757a]">Online 24/7</div>
+                <div className="text-[10px] font-semibold text-[#202124]">{b.label}</div>
+                <div className="truncate text-[9px] text-[#70757a]">{b.sub}</div>
               </div>
             </div>
-            <div className="flex items-center gap-2 rounded-xl bg-black/[0.03] p-2.5">
-              <div className="grid h-7 w-7 place-items-center rounded-full bg-lime-deep text-ink">
-                <Euro className="h-3.5 w-3.5" />
-              </div>
-              <div className="min-w-0">
-                <div className="text-[10px] font-semibold text-[#202124]">Tariffario</div>
-                <div className="truncate text-[9px] text-[#70757a]">Trasparente</div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+        </motion.div>
+      )}
 
       {/* Review snippet */}
       <div className="px-5 pt-4 pb-5">
         <div className="flex items-center gap-2 text-[10px] text-[#70757a]">
           <div className="h-5 w-5 rounded-full bg-black/10" />
-          <span>{isAfter ? "Laura M." : "Utente"}</span>
+          <span>{isAfter ? reviewerAfter : reviewerBefore}</span>
           <Stars value={isAfter ? 5 : 2} />
         </div>
         <motion.p
