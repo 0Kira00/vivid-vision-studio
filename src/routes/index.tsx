@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import heroDesktop from "@/assets/hero-desktop.mp4";
 import heroMobile from "@/assets/hero-mobile.mp4";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
@@ -129,7 +130,7 @@ function Index() {
 function Nav() {
   return (
     <header className="fixed top-3 left-1/2 z-50 w-[min(96%,1180px)] -translate-x-1/2">
-      <nav className="flex items-center justify-between rounded-full border border-border/70 bg-surface/80 px-4 py-2.5 backdrop-blur-xl shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]">
+      <nav className="flex items-center justify-between rounded-full border border-white/25 bg-white/10 px-4 py-2.5 backdrop-blur-md shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]">
         <a href="#top" className="flex items-center gap-2 pl-2">
           <span className="h-2.5 w-2.5 rounded-full bg-lime-deep shadow-[0_0_20px_var(--lime)]" />
           <span className="font-display text-lg">Visibilia</span>
@@ -175,12 +176,7 @@ function Hero() {
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/55" />
 
           {/* Nav spacer + text overlay */}
-          <div className="relative z-10 flex h-full flex-col justify-between p-6 pt-24 md:p-14 md:pt-28 lg:p-20 lg:pt-32">
-            <div className="inline-flex w-fit items-center gap-2 self-start rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.14em] text-white backdrop-blur-md md:text-xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
-              Agenzia digitale per chi vuole farsi notare
-            </div>
-
+          <div className="relative z-10 flex h-full flex-col justify-end p-6 pb-10 md:p-14 lg:p-20">
             <div className="max-w-5xl">
               <h1 className="font-display text-[clamp(2.6rem,7.5vw,7rem)] leading-[0.95] text-white">
                 Siamo il motivo{" "}
@@ -307,7 +303,16 @@ function Services() {
                 <button
                   onMouseEnter={() => setActive(i)}
                   onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
+                  onClick={() => {
+                    setActive(i);
+                    if (typeof window !== "undefined" && window.innerWidth < 1024) {
+                      requestAnimationFrame(() =>
+                        document
+                          .getElementById("servizio-dettaglio")
+                          ?.scrollIntoView({ behavior: "smooth", block: "center" })
+                      );
+                    }
+                  }}
                   className={`group relative flex w-full items-center gap-5 px-6 py-5 text-left transition ${
                     isActive ? "bg-lime-soft/60" : "hover:bg-muted/60"
                   }`}
@@ -350,7 +355,7 @@ function Services() {
             className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-lime-deep opacity-20 blur-3xl"
           />
 
-          <div key={active} className="rise-in relative">
+          <div key={active} id="servizio-dettaglio" className="rise-in relative scroll-mt-24">
             <div className="text-xs uppercase tracking-[0.16em] text-lime">
               Servizio {services[active].n}
             </div>
@@ -598,15 +603,19 @@ function Faq({
                     +
                   </span>
                 </button>
-                <div
-                  className={`grid transition-[grid-template-rows,opacity] duration-300 ease-out ${
-                    open ? "grid-rows-[1fr] pb-6 opacity-100" : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p className="max-w-2xl pl-9 text-ink-soft">{f.a}</p>
-                  </div>
-                </div>
+                <AnimatePresence initial={false}>
+                  {open && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+                      style={{ overflow: "hidden" }}
+                    >
+                      <p className="max-w-2xl pb-6 pl-9 text-ink-soft">{f.a}</p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </li>
             );
           })}
