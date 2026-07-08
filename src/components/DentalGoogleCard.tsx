@@ -151,17 +151,12 @@ export function DentalGoogleCard({
 
       {/* Action row */}
       <div className="mx-5 mt-4 grid grid-cols-4 gap-1 border-y border-black/5 py-3">
-        <motion.div
-          key="web"
-          initial={false}
-          animate={{ opacity: isAfter ? 1 : 0 }}
-          className={`flex flex-col items-center gap-1 ${isAfter ? "" : "pointer-events-none"}`}
-        >
-          <div className="grid h-8 w-8 place-items-center rounded-full bg-[#1a73e8]/10">
-            <Globe className="h-3.5 w-3.5" style={{ color: link }} />
+        <div className={`flex flex-col items-center gap-1 ${isAfter ? "" : "opacity-40"}`}>
+          <div className={`grid h-8 w-8 place-items-center rounded-full ${isAfter ? "bg-[#1a73e8]/10" : "border border-black/10"}`}>
+            <Globe className="h-3.5 w-3.5" style={{ color: isAfter ? link : "#70757a" }} />
           </div>
-          <span className="text-[9px] font-medium" style={{ color: link }}>Sito</span>
-        </motion.div>
+          <span className="text-[9px] font-medium" style={{ color: isAfter ? link : "#70757a" }}>Sito</span>
+        </div>
         {[
           { icon: Navigation, label: "Percorso" },
           { icon: Bookmark, label: "Salva" },
@@ -180,7 +175,9 @@ export function DentalGoogleCard({
       <div className="space-y-2.5 px-5 pt-3 text-xs">
         <div className="flex items-start gap-3">
           <MapPin className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#70757a]" />
-          <span className="text-[#202124]">{address}</span>
+          <span className={isAfter ? "text-[#202124]" : "text-[#70757a]"}>
+            {isAfter ? address : "Indirizzo non confermato"}
+          </span>
         </div>
         <div className="flex items-start gap-3">
           <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#70757a]" />
@@ -196,22 +193,22 @@ export function DentalGoogleCard({
             )}
           </span>
         </div>
-        <motion.div
-          initial={false}
-          animate={{ opacity: isAfter ? 1 : 0 }}
-          className={`flex items-start gap-3 ${isAfter ? "" : "pointer-events-none"}`}
-        >
+        <div className="flex items-start gap-3">
           <Globe className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[#70757a]" />
-          <span style={{ color: link }}>{website}</span>
-        </motion.div>
+          {isAfter ? (
+            <span style={{ color: link }}>{website}</span>
+          ) : (
+            <span className="text-[#70757a]">Sito non disponibile</span>
+          )}
+        </div>
       </div>
 
       {/* Badges */}
-      {showBadges && (
+      {showBadges && isAfter && (
         <motion.div
           initial={false}
-          animate={{ opacity: isAfter ? 1 : 0 }}
-          className={`mx-5 mt-4 grid gap-2 ${badges.length > 1 ? "grid-cols-2" : "grid-cols-1"} ${isAfter ? "" : "pointer-events-none"}`}
+          animate={{ opacity: 1 }}
+          className={`mx-5 mt-4 grid gap-2 ${badges.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}
         >
           {badges.map((b) => (
             <div key={b.label} className="flex items-center gap-2 rounded-xl bg-black/[0.03] p-2.5">

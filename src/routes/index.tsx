@@ -60,9 +60,10 @@ const services = [
   },
   {
     n: "06",
-    title: "Autorità del brand",
-    body: "Logo, palette, copy. L'identità che ti fa sembrare il punto di riferimento del settore.",
-    tags: ["Brand", "Voice", "Assets"],
+    title: "Gestione social media",
+    body: "Contenuti, calendario editoriale e community. Presto tra i nostri servizi.",
+    tags: ["Instagram", "Contenuti", "Community"],
+    soon: true,
   },
 ];
 
@@ -325,7 +326,20 @@ function Services() {
                     {s.n}
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block font-display text-lg md:text-xl">{s.title}</span>
+                    <span className="flex flex-wrap items-center gap-2">
+                      <span
+                        className={`font-display text-lg md:text-xl ${
+                          "soon" in s && s.soon ? "text-ink-soft line-through" : ""
+                        }`}
+                      >
+                        {s.title}
+                      </span>
+                      {"soon" in s && s.soon && (
+                        <span className="rounded-full bg-lime-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
+                          Arriverà presto
+                        </span>
+                      )}
+                    </span>
                   </span>
                   <span
                     className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border transition ${
@@ -455,10 +469,13 @@ function PrimaDopo() {
               beforeAlt="Sito prima del restyling"
               afterAlt="Sito dopo il restyling"
             />
+          </div>
+
+          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
             {primaDopoCallouts.map((c) => (
               <span
                 key={c.label}
-                className={`callout-pop pointer-events-none absolute ${c.side} z-20 hidden items-center gap-1.5 rounded-full bg-lime px-3 py-1.5 text-[11px] font-semibold text-ink shadow-lg md:inline-flex`}
+                className="callout-pop inline-flex items-center gap-1.5 rounded-full bg-lime px-3 py-1.5 text-[11px] font-semibold text-ink shadow-lg"
                 style={{ animationDelay: c.delay }}
               >
                 <span aria-hidden>↗</span>
