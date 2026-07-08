@@ -204,27 +204,34 @@ export function DentalGoogleCard({
       </div>
 
       {/* Badges */}
-      {showBadges && isAfter && (
-        <motion.div
-          initial={false}
-          animate={{ opacity: 1 }}
-          className={`mx-5 mt-4 grid gap-2 ${badges.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}
-        >
+      {showBadges && (
+        <div className={`mx-5 mt-4 grid gap-2 ${badges.length > 1 ? "grid-cols-2" : "grid-cols-1"}`}>
           {badges.map((b) => (
-            <div key={b.label} className="flex items-center gap-2 rounded-xl bg-black/[0.03] p-2.5">
+            <div
+              key={b.label}
+              className={`flex items-center gap-2 rounded-xl bg-black/[0.03] p-2.5 ${isAfter ? "" : "opacity-60"}`}
+            >
               <div
                 className="grid h-7 w-7 shrink-0 place-items-center rounded-full"
-                style={{ backgroundColor: b.bg, color: b.fg ?? "#ffffff" }}
+                style={
+                  isAfter
+                    ? { backgroundColor: b.bg, color: b.fg ?? "#ffffff" }
+                    : { borderWidth: 1, borderColor: "rgba(0,0,0,0.1)", color: "#70757a" }
+                }
               >
                 <b.icon className="h-3.5 w-3.5" />
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] font-semibold text-[#202124]">{b.label}</div>
-                <div className="truncate text-[9px] text-[#70757a]">{b.sub}</div>
+                <div className={`text-[10px] font-semibold ${isAfter ? "text-[#202124]" : "text-[#70757a]"}`}>
+                  {b.label}
+                </div>
+                <div className="truncate text-[9px] text-[#70757a]">
+                  {isAfter ? b.sub : "Non disponibile"}
+                </div>
               </div>
             </div>
           ))}
-        </motion.div>
+        </div>
       )}
 
       {/* Review snippet */}

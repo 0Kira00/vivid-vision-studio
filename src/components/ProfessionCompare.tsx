@@ -231,22 +231,6 @@ export function ProfessionCompare() {
               aria-hidden
               className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[222%] max-w-none -translate-x-[60%] -translate-y-[45%] select-none"
             />
-            <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
-              {[
-                { label: "Nessun sito", top: "top-12", delay: "0.2s" },
-                { label: "Orari mancanti", top: "top-1/2", delay: "0.5s" },
-                { label: "Poche recensioni", top: "bottom-16", delay: "0.8s" },
-              ].map((c) => (
-                <span
-                  key={c.label}
-                  className={`callout-pop absolute -left-3 ${c.top} inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-red-200 bg-white px-3 py-1.5 text-[11px] font-semibold text-red-600 shadow-lg`}
-                  style={{ animationDelay: c.delay }}
-                >
-                  <span aria-hidden>✕</span>
-                  {c.label}
-                </span>
-              ))}
-            </div>
             <div className="relative z-10">
               <button
                 onClick={handleWrong}
@@ -329,22 +313,6 @@ export function ProfessionCompare() {
               aria-hidden
               className="pointer-events-none absolute left-1/2 top-1/2 z-0 w-[218%] max-w-none -translate-x-[39%] -translate-y-[45%] select-none"
             />
-            <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
-              {[
-                { label: "SEO migliorata", top: "top-12", delay: "0.35s" },
-                { label: "Prenotazioni online", top: "top-1/2", delay: "0.65s" },
-                { label: "Foto professionali", top: "bottom-16", delay: "0.95s" },
-              ].map((c) => (
-                <span
-                  key={c.label}
-                  className={`callout-pop absolute -right-3 ${c.top} inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-lime px-3 py-1.5 text-[11px] font-semibold text-ink shadow-lg`}
-                  style={{ animationDelay: c.delay }}
-                >
-                  <span aria-hidden>↗</span>
-                  {c.label}
-                </span>
-              ))}
-            </div>
             <button
               onClick={handleRight}
               className="relative z-10 block w-full cursor-pointer text-left transition-transform hover:scale-[1.02] active:scale-[0.99]"
