@@ -130,7 +130,7 @@ function Index() {
 function Nav() {
   return (
     <header className="fixed top-3 left-1/2 z-50 w-[min(96%,1180px)] -translate-x-1/2">
-      <nav className="flex items-center justify-between rounded-full border border-white/25 bg-white/10 px-4 py-2.5 backdrop-blur-md shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]">
+      <nav className="flex items-center justify-between rounded-full border border-border/70 bg-surface/65 px-4 py-2.5 backdrop-blur-xl shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]">
         <a href="#top" className="flex items-center gap-2 pl-2">
           <span className="h-2.5 w-2.5 rounded-full bg-lime-deep shadow-[0_0_20px_var(--lime)]" />
           <span className="font-display text-lg">Visibilia</span>
