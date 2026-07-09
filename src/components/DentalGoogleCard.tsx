@@ -77,7 +77,7 @@ export function DentalGoogleCard({
   const link = "#1a73e8";
 
   return (
-    <div className="relative w-full overflow-hidden rounded-[36px] bg-white shadow-2xl ring-1 ring-black/10">
+    <div className="relative min-h-[680px] w-full overflow-hidden rounded-[36px] bg-white shadow-2xl ring-1 ring-black/10">
       {/* Status bar mock */}
       <div className="flex items-center justify-between px-6 pt-3 pb-1 text-[11px] font-semibold text-[#202124]">
         <span>9:41</span>
