@@ -9,6 +9,7 @@ import site1After from "@/assets/site1-after.jpg";
 import { Calendar, Tag, Search } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { ProfessionCompare } from "@/components/ProfessionCompare";
+import { SearchBoost } from "@/components/SearchBoost";
 import { SITE_URL } from "@/lib/seo";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
@@ -119,6 +120,7 @@ function Index() {
         <Marquee />
         <Services />
         <PrimaDopo />
+        <SearchBoost />
         <MilionDollar />
         <Faq openFaq={openFaq} setOpenFaq={setOpenFaq} />
         <Contact />
@@ -440,12 +442,6 @@ const primaDopoHighlights = [
   { icon: Search, label: "+180% chiamate da Google" },
 ];
 
-const primaDopoCallouts = [
-  { label: "Prenotazione online", side: "top-4 left-4", delay: "0s" },
-  { label: "Foto professionali", side: "top-4 right-4", delay: "0.3s" },
-  { label: "SEO migliorata", side: "bottom-4 left-4", delay: "0.6s" },
-];
-
 function PrimaDopo() {
   return (
     <section id="prima-dopo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
@@ -469,19 +465,6 @@ function PrimaDopo() {
               beforeAlt="Sito prima del restyling"
               afterAlt="Sito dopo il restyling"
             />
-          </div>
-
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
-            {primaDopoCallouts.map((c) => (
-              <span
-                key={c.label}
-                className="callout-pop inline-flex items-center gap-1.5 rounded-full bg-lime px-3 py-1.5 text-[11px] font-semibold text-ink shadow-lg"
-                style={{ animationDelay: c.delay }}
-              >
-                <span aria-hidden>↗</span>
-                {c.label}
-              </span>
-            ))}
           </div>
 
           <div className="mt-4 flex flex-col items-center gap-5 px-2">
