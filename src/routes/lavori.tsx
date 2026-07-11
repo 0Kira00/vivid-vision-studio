@@ -12,7 +12,6 @@ import site2After from "@/assets/site2-after.jpg";
 import site3After from "@/assets/site3-after.jpg";
 import { Reveal } from "@/components/Reveal";
 import { SITE_URL } from "@/lib/seo";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
 export const Route = createFileRoute("/lavori")({
   head: () => ({
@@ -52,7 +51,6 @@ const works: Work[] = [
 
 function Lavori() {
   return (
-    <SmoothScroll>
     <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
       <div aria-hidden className="pointer-events-none fixed inset-0 -z-10">
         <div className="absolute -top-20 -left-24 h-[420px] w-[420px] rounded-full bg-lime opacity-40 blur-[120px]" />
@@ -151,6 +149,5 @@ function Lavori() {
         </div>
       </footer>
     </div>
-    </SmoothScroll>
   );
 }
