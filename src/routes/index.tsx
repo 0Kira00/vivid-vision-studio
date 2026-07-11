@@ -11,7 +11,6 @@ import { Reveal } from "@/components/Reveal";
 import { ProfessionCompare } from "@/components/ProfessionCompare";
 import { SearchBoost } from "@/components/SearchBoost";
 import { SITE_URL } from "@/lib/seo";
-import { SmoothScroll } from "@/components/SmoothScroll";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -28,43 +27,31 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const services = [
+const methodSteps = [
   {
-    n: "01",
-    title: "Siti web che convertono",
-    body: "Veloci, eleganti, costruiti per trasformare un visitatore in una prenotazione.",
-    tags: ["Design", "Sviluppo", "Copy"],
+    n: "1",
+    title: "Analisi gratuita",
+    body: "Guardiamo come appari su Google oggi: sito, scheda, recensioni, concorrenti.",
+    meta: "30 minuti · senza impegno",
   },
   {
-    n: "02",
-    title: "Scheda Google ottimizzata",
-    body: "La tua scheda Business Profile diventa il tuo miglior commerciale.",
-    tags: ["GBP", "Foto", "Categorie"],
+    n: "2",
+    title: "Fondamenta",
+    body: "Sito veloce e scheda Google ottimizzata: le basi su cui Google ti premia.",
+    meta: "settimane 1–4",
   },
   {
-    n: "03",
-    title: "Primi su Google nella tua zona",
-    body: "SEO locale fatta come si deve. Ti facciamo trovare da chi cerca proprio te.",
-    tags: ["SEO locale", "Maps", "Keyword"],
+    n: "3",
+    title: "Spinta",
+    body: "Recensioni vere, contenuti locali, foto professionali. La posizione sale.",
+    meta: "mesi 2–5",
   },
   {
-    n: "04",
-    title: "Recensioni che pesano davvero",
-    body: "Strategie etiche per raccogliere recensioni vere dai tuoi clienti più felici.",
-    tags: ["Automazioni", "QR", "Etica"],
-  },
-  {
-    n: "05",
-    title: "Foto professionali",
-    body: "Servizio fotografico dedicato al tuo studio. La prima impressione passa dagli occhi.",
-    tags: ["Shooting", "Editing"],
-  },
-  {
-    n: "06",
-    title: "Gestione social media",
-    body: "Contenuti, calendario editoriale e community. Presto tra i nostri servizi.",
-    tags: ["Instagram", "Contenuti", "Community"],
-    soon: true,
+    n: "4",
+    title: "Dominio",
+    body: "Primo nella tua zona. Report mensile con numeri veri: chiamate, visite, richieste.",
+    meta: "dal mese 6 · si mantiene",
+    dark: true,
   },
 ];
 
@@ -112,8 +99,7 @@ function Index() {
   }, []);
 
   return (
-    <SmoothScroll>
-      <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
+    <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
         <Nav />
         <Hero />
         <ResultsStrip />
@@ -125,8 +111,7 @@ function Index() {
         <Faq openFaq={openFaq} setOpenFaq={setOpenFaq} />
         <Contact />
         <Footer />
-      </div>
-    </SmoothScroll>
+    </div>
   );
 }
 
@@ -200,14 +185,23 @@ function Hero() {
                   href="#contatti"
                   className="group inline-flex items-center gap-2 rounded-full bg-lime px-5 py-3 text-sm font-semibold text-ink shadow-[0_10px_30px_-10px_var(--lime-deep)] transition hover:bg-lime-deep"
                 >
-                  Voglio un sito nuovo
+                  Voglio essere il primo
                   <span className="transition group-hover:translate-x-0.5" aria-hidden>↗</span>
                 </a>
                 <a
                   href="#prima-dopo"
+                  onClick={() => {
+                    window.setTimeout(() => {
+                      const el = document.getElementById("lavori-cta");
+                      if (!el) return;
+                      el.classList.remove("bounce-once");
+                      void el.offsetWidth;
+                      el.classList.add("bounce-once");
+                    }, 650);
+                  }}
                   className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-md transition hover:bg-white/20"
                 >
-                  Voglio migliorare il mio sito
+                  I nostri progetti
                 </a>
               </div>
             </div>
@@ -276,141 +270,39 @@ function Marquee() {
 /* ---------- SERVICES: redesigned as bento + interactive list ---------- */
 
 function Services() {
-  const [active, setActive] = useState(0);
-
   return (
     <section id="cosa-facciamo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
       <SectionGhostNumber n="01" />
-      <div className="flex items-end justify-between gap-8">
-        <div>
-          <SectionLabel>/ 01 — Cosa facciamo</SectionLabel>
-          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-            Tutto ciò che serve per{" "}
-            <span className="font-serif-i">essere scelto</span> prima degli altri.
-          </h2>
-        </div>
-        <div className="hidden max-w-xs text-sm text-ink-soft md:block">
-          Sei leve, un unico obiettivo: renderti la scelta più ovvia della tua zona.
-        </div>
-      </div>
+      <SectionLabel>/ Il metodo</SectionLabel>
+      <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+        Niente fumo. <span className="font-serif-i">Quattro passi</span>, sempre gli stessi.
+      </h2>
 
-      {/* Interactive list + preview panel */}
-      <div className="mt-14 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
-        {/* LEFT: list */}
-        <Reveal>
-        <ul className="divide-y divide-border overflow-hidden rounded-3xl border border-border bg-card">
-          {services.map((s, i) => {
-            const isActive = active === i;
-            return (
-              <li key={s.n}>
-                <button
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => {
-                    setActive(i);
-                    if (typeof window !== "undefined" && window.innerWidth < 1024) {
-                      requestAnimationFrame(() =>
-                        document
-                          .getElementById("servizio-dettaglio")
-                          ?.scrollIntoView({ behavior: "smooth", block: "center" })
-                      );
-                    }
-                  }}
-                  className={`group relative flex w-full items-center gap-5 px-6 py-5 text-left transition ${
-                    isActive ? "bg-lime-soft/60" : "hover:bg-muted/60"
-                  }`}
-                >
-                  <span
-                    className={`grid h-10 w-10 shrink-0 place-items-center rounded-full text-xs font-semibold transition ${
-                      isActive ? "bg-ink text-lime" : "bg-muted text-ink-soft"
-                    }`}
-                  >
-                    {s.n}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="flex flex-wrap items-center gap-2">
-                      <span
-                        className={`font-display text-lg md:text-xl ${
-                          "soon" in s && s.soon ? "text-ink-soft line-through" : ""
-                        }`}
-                      >
-                        {s.title}
-                      </span>
-                      {"soon" in s && s.soon && (
-                        <span className="rounded-full bg-lime-soft px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-ink-soft">
-                          Arriverà presto
-                        </span>
-                      )}
-                    </span>
-                  </span>
-                  <span
-                    className={`grid h-9 w-9 shrink-0 place-items-center rounded-full border transition ${
-                      isActive
-                        ? "border-lime-deep bg-lime text-ink rotate-45"
-                        : "border-border text-ink-soft"
-                    }`}
-                    aria-hidden
-                  >
-                    →
-                  </span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-        </Reveal>
-
-        {/* RIGHT: preview panel */}
-        <Reveal delay={120} className="relative overflow-hidden rounded-3xl bg-ink p-8 text-background md:p-10">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-lime opacity-25 blur-3xl"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-lime-deep opacity-20 blur-3xl"
-          />
-
-          <div key={active} id="servizio-dettaglio" className="rise-in relative scroll-mt-24">
-            <div className="text-xs uppercase tracking-[0.16em] text-lime">
-              Servizio {services[active].n}
+      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {methodSteps.map((s, i) => (
+          <Reveal key={s.n} delay={i * 90}>
+            <div
+              className={`flex h-full flex-col rounded-3xl border p-6 md:p-7 ${
+                s.dark
+                  ? "border-ink bg-ink text-background"
+                  : "border-border bg-card text-ink"
+              }`}
+            >
+              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-lime font-display text-lg text-ink">
+                {s.n}
+              </span>
+              <h3 className="mt-6 font-display text-xl md:text-2xl">{s.title}</h3>
+              <p className={`mt-3 flex-1 text-sm leading-relaxed ${s.dark ? "text-white/70" : "text-ink-soft"}`}>
+                {s.body}
+              </p>
+              <div className="mt-8 text-xs font-semibold uppercase tracking-wider text-lime-deep">
+                {s.meta}
+              </div>
             </div>
-            <h3 className="mt-4 font-display text-3xl leading-tight md:text-4xl">
-              {services[active].title}
-            </h3>
-            <p className="mt-4 max-w-md text-base text-white/75">
-              {services[active].body}
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {services[active].tags.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
-
-            <div className="mt-10 grid grid-cols-3 gap-3 border-t border-white/10 pt-6">
-              <MiniStat k="Progetti" v="120+" />
-              <MiniStat k="Città" v="34" />
-              <MiniStat k="Rating medio" v="4,9" />
-            </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        ))}
       </div>
     </section>
-  );
-}
-
-function MiniStat({ k, v }: { k: string; v: string }) {
-  return (
-    <div>
-      <div className="font-display text-2xl text-lime">{v}</div>
-      <div className="mt-1 text-[11px] uppercase tracking-[0.14em] text-white/60">{k}</div>
-    </div>
   );
 }
 
@@ -473,6 +365,7 @@ function PrimaDopo() {
             </p>
             <Link
               to="/lavori"
+              id="lavori-cta"
               className="inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink shadow-[0_10px_30px_-10px_var(--lime-deep)] transition hover:bg-lime-deep"
             >
               Visualizza tutti i nostri lavori

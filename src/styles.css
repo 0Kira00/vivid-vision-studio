@@ -179,6 +179,18 @@
   animation: calloutPop 4.5s ease-in-out infinite;
 }
 
+@keyframes bounceOnce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  20% { transform: translateY(-14px) scale(1.06); }
+  45% { transform: translateY(0) scale(1); }
+  60% { transform: translateY(-7px) scale(1.03); }
+  80% { transform: translateY(0) scale(1); }
+}
+.bounce-once {
+  animation: bounceOnce 1s cubic-bezier(0.28, 0.84, 0.42, 1);
+  box-shadow: 0 0 0 4px var(--lime-soft), 0 10px 30px -10px var(--lime-deep);
+}
+
 @keyframes shine {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
