@@ -4,16 +4,18 @@ import confetti from "canvas-confetti";
 import { Check, Play, ChevronLeft, ChevronRight, Calendar, Euro, Bike } from "lucide-react";
 import { DentalGoogleCard, type CardBadge } from "@/components/DentalGoogleCard";
 import { PhoneFrame } from "@/components/PhoneFrame";
-import dental1 from "@/assets/dental-1.jpg";
-import dental2 from "@/assets/dental-2.jpg";
-import dental3 from "@/assets/dental-3.jpg";
-import law1 from "@/assets/law-1.jpg";
-import law2 from "@/assets/law-2.jpg";
-import law3 from "@/assets/law-3.jpg";
-import salon1 from "@/assets/site3-after.jpg";
-import rest1 from "@/assets/rest-1.jpg";
-import rest2 from "@/assets/rest-2.jpg";
-import rest3 from "@/assets/rest-3.jpg";
+import dental1 from "@/assets/dentista-1.jpg";
+import dental2 from "@/assets/dentista-2.jpg";
+import dental3 from "@/assets/dentista-3.jpg";
+import law1 from "@/assets/avvocato-1.jpg";
+import law2 from "@/assets/avvocato-2.jpg";
+import law3 from "@/assets/avvocato-3.jpg";
+import salon1 from "@/assets/parrucchiere-1.jpg";
+import salon2 from "@/assets/parrucchiere-2.jpg";
+import salon3 from "@/assets/parrucchiere-3.jpg";
+import rest1 from "@/assets/ristorante-1.jpg";
+import rest2 from "@/assets/ristorante-2.jpg";
+import rest3 from "@/assets/ristorante-3.jpg";
 import handLeft from "@/assets/hand-photo-left.png";
 import handRight from "@/assets/hand-photo-right.png";
 
@@ -100,7 +102,7 @@ const PROFESSIONS: {
       category: "Parrucchiere specialista",
       address: "Via Roma 88, Milano",
       website: "www.brera13milano.com",
-      photos: [salon1, salon1, salon1],
+      photos: [salon1, salon2, salon3],
       reviewBefore: "Sito inesistente, ho dovuto chiamare più volte per un orario.",
       reviewAfter: "Prenotazione online comoda, foto vere del salone, personale gentile.",
       reviewerBefore: "Giulia P.",
