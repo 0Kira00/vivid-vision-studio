@@ -60,8 +60,8 @@ function Lavori() {
 
       <header className="fixed top-3 left-1/2 z-50 w-[min(96%,1180px)] -translate-x-1/2">
         <nav className="flex items-center justify-between rounded-full border border-border/70 bg-surface/80 px-4 py-2.5 backdrop-blur-xl shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]">
-          <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm font-medium text-ink transition hover:bg-muted">
-            <span aria-hidden>←</span> Torna al sito
+          <Link to="/" className="group inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-semibold text-background shadow-[0_8px_24px_-10px_rgba(0,0,0,0.5)] transition hover:bg-ink/85">
+            <span aria-hidden className="text-base transition group-hover:-translate-x-0.5">←</span> Torna al sito
           </Link>
           <Link to="/" className="flex items-center gap-2 pr-2">
             <span className="h-2.5 w-2.5 rounded-full bg-lime-deep shadow-[0_0_20px_var(--lime)]" />

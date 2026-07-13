@@ -6,7 +6,7 @@ import heroMobile from "@/assets/hero-mobile.mp4";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
 import site1Before from "@/assets/site1-before.jpg";
 import site1After from "@/assets/site1-after.jpg";
-import { Calendar, Tag, Search } from "lucide-react";
+import { Calendar, Tag, Search, Globe, MapPin, Star, Camera, Sparkles, ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { ProfessionCompare } from "@/components/ProfessionCompare";
 import { SearchBoost } from "@/components/SearchBoost";
@@ -104,10 +104,11 @@ function Index() {
         <Hero />
         <ResultsStrip />
         <Marquee />
-        <Services />
+        <ServicesGrid />
         <PrimaDopo />
         <SearchBoost />
         <MilionDollar />
+        <Method />
         <Faq openFaq={openFaq} setOpenFaq={setOpenFaq} />
         <Contact />
         <Footer />
@@ -188,21 +189,12 @@ function Hero() {
                   Voglio essere il primo
                   <span className="transition group-hover:translate-x-0.5" aria-hidden>↗</span>
                 </a>
-                <a
-                  href="#prima-dopo"
-                  onClick={() => {
-                    window.setTimeout(() => {
-                      const el = document.getElementById("lavori-cta");
-                      if (!el) return;
-                      el.classList.remove("bounce-once");
-                      void el.offsetWidth;
-                      el.classList.add("bounce-once");
-                    }, 650);
-                  }}
+                <Link
+                  to="/lavori"
                   className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-md transition hover:bg-white/20"
                 >
                   I nostri progetti
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -269,10 +261,79 @@ function Marquee() {
 
 /* ---------- SERVICES: redesigned as bento + interactive list ---------- */
 
-function Services() {
+const serviceCards = [
+  {
+    icon: Globe,
+    title: "Siti web che convertono",
+    body: "Veloci, eleganti, costruiti per trasformare un visitatore in una chiamata. Design su misura, non template.",
+    featured: true,
+  },
+  { icon: MapPin, title: "Scheda Google ottimizzata", body: "La tua scheda Business Profile diventa il tuo miglior commerciale: foto, orari, categorie, servizi." },
+  { icon: Search, title: "Primi su Google in zona", body: "SEO locale fatta come si deve. Ti facciamo trovare da chi cerca proprio te, dove sei tu." },
+  { icon: Star, title: "Recensioni che pesano", body: "Sistema etico e automatico per raccogliere recensioni vere dai tuoi clienti più felici." },
+  { icon: Camera, title: "Foto professionali", body: "Servizio fotografico dedicato. La prima impressione, su Google, passa dagli occhi." },
+  { icon: Sparkles, title: "Identità di brand", body: "Logo, palette, copy. L'immagine che ti fa sembrare il punto di riferimento del settore." },
+];
+
+function ServicesGrid() {
   return (
     <section id="cosa-facciamo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
       <SectionGhostNumber n="01" />
+      <div className="flex items-end justify-between gap-8">
+        <div>
+          <SectionLabel>/ 01 — Cosa facciamo</SectionLabel>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+            Tutto ciò che serve per{" "}
+            <span className="font-serif-i">essere scelto</span> prima degli altri.
+          </h2>
+        </div>
+        <p className="hidden max-w-xs text-sm text-ink-soft md:block">
+          Sei leve, un unico obiettivo: renderti la scelta più ovvia della tua zona.
+        </p>
+      </div>
+
+      <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {serviceCards.map((s, i) => (
+          <Reveal key={s.title} delay={i * 80} className={s.featured ? "md:col-span-2 lg:col-span-1 lg:row-span-2" : ""}>
+            <div
+              className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border p-7 transition hover:-translate-y-1 md:p-8 ${
+                s.featured ? "border-ink bg-ink text-background" : "border-border bg-card text-ink"
+              }`}
+            >
+              <div
+                aria-hidden
+                className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl transition group-hover:opacity-80 ${
+                  s.featured ? "bg-lime/25 opacity-100" : "bg-lime/20 opacity-0 group-hover:opacity-100"
+                }`}
+              />
+              <div
+                className={`grid h-12 w-12 place-items-center rounded-2xl ${
+                  s.featured ? "bg-lime text-ink" : "bg-lime-soft text-ink"
+                }`}
+              >
+                <s.icon className="h-5 w-5" />
+              </div>
+              <h3 className={`relative mt-6 font-display leading-tight ${s.featured ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"}`}>
+                {s.title}
+              </h3>
+              <p className={`relative mt-3 flex-1 text-sm leading-relaxed ${s.featured ? "max-w-sm text-white/75 md:text-base" : "text-ink-soft"}`}>
+                {s.body}
+              </p>
+              <span className={`relative mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider ${s.featured ? "text-lime" : "text-lime-deep"}`}>
+                Scopri di più
+                <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </span>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function Method() {
+  return (
+    <section id="metodo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
       <SectionLabel>/ Il metodo</SectionLabel>
       <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
         Niente fumo. <span className="font-serif-i">Quattro passi</span>, sempre gli stessi.
