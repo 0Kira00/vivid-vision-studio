@@ -127,6 +127,26 @@
   animation: blink 1s step-end infinite;
 }
 
+@utility animate-caret {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes pingSlow {
+  0% { transform: scale(1); opacity: 0.5; }
+  75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+@utility animate-ping-slow {
+  animation: pingSlow 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0.6); }
+  50% { opacity: 1; transform: scale(1); }
+}
+@utility animate-sparkle {
+  animation: sparkle 1.6s ease-in-out infinite;
+}
+
 @utility bg-map {
   background-color: #eef3f7;
   background-image:
