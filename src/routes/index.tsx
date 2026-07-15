@@ -6,10 +6,11 @@ import heroMobile from "@/assets/hero-mobile.mp4";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
 import site1Before from "@/assets/site1-before.jpg";
 import site1After from "@/assets/site1-after.jpg";
-import { Calendar, Tag, Search, Globe, MapPin, Star, Camera, Sparkles, ArrowUpRight } from "lucide-react";
+import { Calendar, Tag, Search } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { ProfessionCompare } from "@/components/ProfessionCompare";
 import { SearchBoost } from "@/components/SearchBoost";
+import { ServicesOrbit } from "@/components/ServicesOrbit";
 import { SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -79,14 +80,12 @@ const faqs = [
 ];
 
 const marqueeItems = [
-  "Siti web su misura",
-  "Google Business Profile",
-  "SEO locale",
-  "Identità visiva",
-  "Foto professionali",
-  "Recensioni reali",
-  "Campagne ADS",
-  "Automazioni",
+  "+38% di chiamate in 90 giorni",
+  "1° su Google Maps in zona",
+  "Rating medio 4,9 / 5",
+  "Da 12 a 87 recensioni in 6 mesi",
+  "×2 visite al sito in 4 mesi",
+  "Primi su Google nella tua zona",
 ];
 
 function Index() {
@@ -102,9 +101,8 @@ function Index() {
     <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
         <Nav />
         <Hero />
-        <ResultsStrip />
         <Marquee />
-        <ServicesGrid />
+        <ServicesOrbit />
         <PrimaDopo />
         <SearchBoost />
         <MilionDollar />
@@ -204,43 +202,6 @@ function Hero() {
   );
 }
 
-const results = [
-  { icon: "↗", label: "Chiamate", headline: "+312%", note: "parrucchiere · Milano · 90 giorni" },
-  { icon: "★", label: "Rating", headline: "4,9 / 5", note: "da 12 a 187 recensioni in 6 mesi" },
-  { icon: "◎", label: "Google Maps", headline: "1° posto", note: "zona di competenza" },
-  { icon: "◐", label: "Traffico", headline: "×4,8", note: "visite organiche · 4 mesi" },
-];
-
-function ResultsStrip() {
-  return (
-    <section className="mx-auto mt-8 w-[min(96%,1280px)] md:mt-12">
-      {/* Mobile: horizontal snap-scroll. Desktop: 4-col grid. */}
-      <div className="no-scrollbar -mx-2 flex snap-x snap-mandatory gap-3 overflow-x-auto px-2 md:mx-0 md:grid md:grid-cols-4 md:gap-4 md:overflow-visible md:px-0">
-        {results.map((r, i) => (
-          <Reveal key={i} delay={i * 80} className="min-w-[240px] flex-shrink-0 snap-start md:min-w-0">
-            <div className="group relative h-full overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-[0_10px_40px_-25px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5">
-              <div
-                aria-hidden
-                className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-lime opacity-30 blur-2xl transition group-hover:opacity-60"
-              />
-              <div className="relative flex items-center gap-2 text-[11px] uppercase tracking-[0.14em] text-ink-soft">
-                <span className="grid h-5 w-5 place-items-center rounded-full bg-lime text-ink">
-                  {r.icon}
-                </span>
-                {r.label}
-              </div>
-              <div className="relative mt-3 font-display text-3xl leading-none tabular-nums">
-                {r.headline}
-              </div>
-              <div className="relative mt-2 text-xs text-muted-foreground">{r.note}</div>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function Marquee() {
   const doubled = [...marqueeItems, ...marqueeItems];
   return (
@@ -260,76 +221,6 @@ function Marquee() {
 }
 
 /* ---------- SERVICES: redesigned as bento + interactive list ---------- */
-
-const serviceCards = [
-  {
-    icon: Globe,
-    title: "Siti web che convertono",
-    body: "Veloci, eleganti, costruiti per trasformare un visitatore in una chiamata. Design su misura, non template.",
-    featured: true,
-  },
-  { icon: MapPin, title: "Scheda Google ottimizzata", body: "La tua scheda Business Profile diventa il tuo miglior commerciale: foto, orari, categorie, servizi." },
-  { icon: Search, title: "Primi su Google in zona", body: "SEO locale fatta come si deve. Ti facciamo trovare da chi cerca proprio te, dove sei tu." },
-  { icon: Star, title: "Recensioni che pesano", body: "Sistema etico e automatico per raccogliere recensioni vere dai tuoi clienti più felici." },
-  { icon: Camera, title: "Foto professionali", body: "Servizio fotografico dedicato. La prima impressione, su Google, passa dagli occhi." },
-  { icon: Sparkles, title: "Identità di brand", body: "Logo, palette, copy. L'immagine che ti fa sembrare il punto di riferimento del settore." },
-];
-
-function ServicesGrid() {
-  return (
-    <section id="cosa-facciamo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
-      <SectionGhostNumber n="01" />
-      <div className="flex items-end justify-between gap-8">
-        <div>
-          <SectionLabel>/ 01 — Cosa facciamo</SectionLabel>
-          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-            Tutto ciò che serve per{" "}
-            <span className="font-serif-i">essere scelto</span> prima degli altri.
-          </h2>
-        </div>
-        <p className="hidden max-w-xs text-sm text-ink-soft md:block">
-          Sei leve, un unico obiettivo: renderti la scelta più ovvia della tua zona.
-        </p>
-      </div>
-
-      <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {serviceCards.map((s, i) => (
-          <Reveal key={s.title} delay={i * 80} className={s.featured ? "md:col-span-2 lg:col-span-1 lg:row-span-2" : ""}>
-            <div
-              className={`group relative flex h-full flex-col overflow-hidden rounded-3xl border p-7 transition hover:-translate-y-1 md:p-8 ${
-                s.featured ? "border-ink bg-ink text-background" : "border-border bg-card text-ink"
-              }`}
-            >
-              <div
-                aria-hidden
-                className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl transition group-hover:opacity-80 ${
-                  s.featured ? "bg-lime/25 opacity-100" : "bg-lime/20 opacity-0 group-hover:opacity-100"
-                }`}
-              />
-              <div
-                className={`grid h-12 w-12 place-items-center rounded-2xl ${
-                  s.featured ? "bg-lime text-ink" : "bg-lime-soft text-ink"
-                }`}
-              >
-                <s.icon className="h-5 w-5" />
-              </div>
-              <h3 className={`relative mt-6 font-display leading-tight ${s.featured ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"}`}>
-                {s.title}
-              </h3>
-              <p className={`relative mt-3 flex-1 text-sm leading-relaxed ${s.featured ? "max-w-sm text-white/75 md:text-base" : "text-ink-soft"}`}>
-                {s.body}
-              </p>
-              <span className={`relative mt-6 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider ${s.featured ? "text-lime" : "text-lime-deep"}`}>
-                Scopri di più
-                <ArrowUpRight className="h-3.5 w-3.5 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </span>
-            </div>
-          </Reveal>
-        ))}
-      </div>
-    </section>
-  );
-}
 
 function Method() {
   return (

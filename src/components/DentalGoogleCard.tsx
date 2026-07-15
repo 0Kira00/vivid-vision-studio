@@ -104,12 +104,12 @@ export function DentalGoogleCard({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="grid h-full grid-cols-3 gap-0.5"
+              className="grid h-full grid-cols-2 gap-0.5"
             >
-              <img src={photos[0]} alt={`Foto studio ${businessName}`} className="col-span-2 h-full w-full object-cover" loading="lazy" />
-              <div className="grid grid-rows-2 gap-0.5">
-                <img src={photos[1] ?? photos[0]} alt={`Interno ${businessName}`} className="h-full w-full object-cover" loading="lazy" />
-                <img src={photos[2] ?? photos[0]} alt={`Staff ${businessName}`} className="h-full w-full object-cover" loading="lazy" />
+              <img src={photos[0]} alt={`Foto studio ${businessName}`} className="h-full w-full object-cover object-center" loading="lazy" />
+              <div className="grid h-full grid-rows-2 gap-0.5">
+                <img src={photos[1] ?? photos[0]} alt={`Interno ${businessName}`} className="h-full w-full object-cover object-center" loading="lazy" />
+                <img src={photos[2] ?? photos[0]} alt={`Staff ${businessName}`} className="h-full w-full object-cover object-center" loading="lazy" />
               </div>
             </motion.div>
           ) : (

@@ -219,14 +219,16 @@ export function ProfessionCompare() {
 
       <div key={profession.id} className="mt-8 grid grid-cols-2 gap-3 sm:gap-6 lg:grid-cols-2 lg:gap-6">
         {/* Non ottimizzata (wrong) */}
-        <div className="flex flex-col items-center [zoom:0.55] sm:[zoom:0.75] md:[zoom:1]">
+        <div className="flex flex-col items-center">
           <div className="mb-4 text-center">
             <span className="rounded-full bg-red-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-red-600">
               Concorrente
             </span>
           </div>
 
-          <div className="relative w-[320px] max-w-full">
+          <div className="h-[400px] w-[176px] sm:h-[545px] sm:w-[240px] md:h-auto md:w-[320px]">
+          <div className="origin-top-left scale-[0.55] sm:scale-75 md:scale-100">
+          <div className="relative w-[320px]">
             <img
               src={handLeft}
               alt=""
@@ -298,17 +300,21 @@ export function ProfessionCompare() {
               </AnimatePresence>
             </div>
           </div>
+          </div>
+          </div>
           <p className="mt-4 text-xs text-ink-soft">Tocca per scoprire perché</p>
         </div>
 
         {/* Ottimizzata (right) */}
-        <div ref={successRef} className="flex flex-col items-center [zoom:0.55] sm:[zoom:0.75] md:[zoom:1]">
+        <div ref={successRef} className="flex flex-col items-center">
           <div className="mb-4 text-center">
             <span className="rounded-full bg-emerald-100 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-emerald-600">
               Ottimizzata da noi
             </span>
           </div>
-          <div className="relative">
+          <div className="h-[400px] w-[176px] sm:h-[545px] sm:w-[240px] md:h-auto md:w-[320px]">
+          <div className="origin-top-left scale-[0.55] sm:scale-75 md:scale-100">
+          <div className="relative w-[320px]">
             <img
               src={handRight}
               alt=""
@@ -352,6 +358,8 @@ export function ProfessionCompare() {
                 </motion.div>
               )}
             </AnimatePresence>
+          </div>
+          </div>
           </div>
           <p className="mt-4 text-xs font-medium text-emerald-600">Scelta giusta ✓</p>
         </div>

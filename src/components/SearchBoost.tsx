@@ -63,13 +63,6 @@ export function SearchBoost() {
               ))}
             </ol>
 
-            <a
-              href="#contatti"
-              className="group mt-8 inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink shadow-[0_10px_30px_-10px_var(--lime-deep)] transition hover:bg-lime-deep"
-            >
-              Voglio essere il primo risultato
-              <span className="transition-transform group-hover:translate-x-0.5">→</span>
-            </a>
           </div>
         </div>
       </div>
