@@ -177,6 +177,19 @@
   50% { transform: translateY(-6px); }
 }
 
+/* CTA "Visualizza tutti i nostri lavori": subtle bounce + pulsing lime glow */
+@keyframes cta-bounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-7px) scale(1.03); }
+}
+
+@utility animate-cta-bounce {
+  animation: cta-bounce 2.1s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
 @utility floaty {
   animation: floaty 6s ease-in-out infinite;
 }

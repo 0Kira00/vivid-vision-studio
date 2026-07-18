@@ -20,27 +20,30 @@ export function SearchBoost() {
   return (
     <section id="ricerche" className="relative overflow-hidden bg-muted/40 py-20 md:py-28">
       <div className="mx-auto w-[min(96%,1180px)]">
+        {/* Section header — same numbered style as the rest of the site */}
+        <div className="mb-12 md:mb-16">
+          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink-soft">
+            <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
+            / 04 — Ogni ricerca, una vetrina
+          </span>
+          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+            Come funziona, <span className="font-serif-i text-lime-deep">passo per passo.</span>
+          </h2>
+          <p className="mt-4 max-w-xl text-ink-soft">
+            Il 76% delle ricerche locali si trasforma in una visita o una chiamata entro 24 ore.
+            Ecco perché essere nei primi 3 risultati vale più di qualsiasi campagna a pagamento.
+          </p>
+        </div>
+
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center">
           {/* Demo */}
           <div>
-            <span className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-ink-soft">
-              <span className="h-1.5 w-1.5 rounded-full bg-google-blue" />
-              Ogni ricerca, una vetrina
-            </span>
             <LocalPackDemo />
           </div>
 
           {/* Explanation */}
           <div>
-            <h2 className="font-display text-[clamp(1.9rem,4.5vw,3.4rem)] leading-[1.05]">
-              Come funziona, <span className="font-serif-i text-lime-deep">passo per passo.</span>
-            </h2>
-            <p className="mt-4 max-w-lg text-ink-soft">
-              Il 76% delle ricerche locali si trasforma in una visita o una chiamata entro 24 ore.
-              Ecco perché essere nei primi 3 risultati vale più di qualsiasi campagna a pagamento.
-            </p>
-
-            <ol className="mt-8 space-y-4">
+            <ol className="space-y-4">
               {steps.map((s, i) => (
                 <motion.li
                   key={s.title}

@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "Visibilia — Agenzia digitale: siti web e SEO locale che ti fanno scegliere su Google" },
       {
         name: "description",
@@ -87,7 +87,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { name: "robots", content: "index, follow" },
       { name: "author", content: SITE_NAME },
-      { name: "theme-color", content: "#c9f26a" },
 
       { property: "og:site_name", content: SITE_NAME },
       { property: "og:title", content: "Visibilia — Farsi scegliere su Google" },
@@ -147,6 +146,11 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="it">
       <head>
         <HeadContent />
+        {/* Fuori da HeadContent: il dedupe di TanStack terrebbe un solo theme-color.
+            Mobile: barra scura che si fonde col video hero (niente striscia lime sotto la Dynamic Island).
+            Desktop Safari: tinta lime su tab e barra URL. */}
+        <meta name="theme-color" content="#0b0b0c" media="(max-width: 767px)" />
+        <meta name="theme-color" content="#c9f26a" media="(min-width: 768px)" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

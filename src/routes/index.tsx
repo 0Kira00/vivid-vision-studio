@@ -10,7 +10,7 @@ import { Calendar, Tag, Search } from "lucide-react";
 import { Reveal } from "@/components/Reveal";
 import { ProfessionCompare } from "@/components/ProfessionCompare";
 import { SearchBoost } from "@/components/SearchBoost";
-import { ServicesOrbit } from "@/components/ServicesOrbit";
+import { ServicesBento } from "@/components/ServicesBento";
 import { SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
@@ -23,7 +23,12 @@ export const Route = createFileRoute("/")({
           "Realizziamo siti web, schede Google Business ottimizzate e strategie SEO locali per professionisti. Più visibilità, più chiamate, più clienti. Preventivo gratuito.",
       },
     ],
-    links: [{ rel: "canonical", href: SITE_URL }],
+    links: [
+      { rel: "canonical", href: SITE_URL },
+      // Preload the correct hero poster so the first paint has no empty frame.
+      { rel: "preload", as: "image", href: "/hero-mobile-poster.jpg", media: "(max-width: 767px)" },
+      { rel: "preload", as: "image", href: "/hero-desktop-poster.jpg", media: "(min-width: 768px)" },
+    ],
   }),
   component: Index,
 });
@@ -52,7 +57,6 @@ const methodSteps = [
     title: "Dominio",
     body: "Primo nella tua zona. Report mensile con numeri veri: chiamate, visite, richieste.",
     meta: "dal mese 6 · si mantiene",
-    dark: true,
   },
 ];
 
@@ -80,12 +84,12 @@ const faqs = [
 ];
 
 const marqueeItems = [
-  "+38% di chiamate in 90 giorni",
-  "1° su Google Maps in zona",
-  "Rating medio 4,9 / 5",
-  "Da 12 a 87 recensioni in 6 mesi",
-  "×2 visite al sito in 4 mesi",
-  "Primi su Google nella tua zona",
+  "Realizzato in Italia 🇮🇹",
+  "Oltre 80 clienti soddisfatti 👥",
+  "Oltre 250 recensioni verificate ⭐️",
+  "Supporto rapido e dedicato ⚡",
+  "Primi su Google. Punto. 📍",
+  "Risultati veri, misurati ogni mese 📈",
 ];
 
 function Index() {
@@ -101,12 +105,12 @@ function Index() {
     <div className="relative min-h-screen overflow-x-hidden bg-background text-ink font-sans">
         <Nav />
         <Hero />
+        <Method />
         <Marquee />
-        <ServicesOrbit />
+        <ServicesBento />
         <PrimaDopo />
         <SearchBoost />
         <MilionDollar />
-        <Method />
         <Faq openFaq={openFaq} setOpenFaq={setOpenFaq} />
         <Contact />
         <Footer />
@@ -116,7 +120,10 @@ function Index() {
 
 function Nav() {
   return (
-    <header className="fixed top-3 left-1/2 z-50 w-[min(96%,1180px)] -translate-x-1/2">
+    <header
+      className="fixed left-1/2 z-50 w-[min(96%,1180px)] -translate-x-1/2"
+      style={{ top: "max(0.75rem, env(safe-area-inset-top))" }}
+    >
       <nav className="flex items-center justify-between rounded-full border border-border/70 bg-surface/65 px-4 py-2.5 backdrop-blur-xl shadow-[0_4px_30px_-15px_rgba(0,0,0,0.15)]">
         <a href="#top" className="flex items-center gap-2 pl-2">
           <span className="h-2.5 w-2.5 rounded-full bg-lime-deep shadow-[0_0_20px_var(--lime)]" />
@@ -139,24 +146,53 @@ function Nav() {
   );
 }
 
+function HeroVideo() {
+  // One video only: the right file for the device, chosen after mount.
+  // Poster <img> renders on the server so the very first paint is already frame 0 —
+  // no flash of a late frame, no double download of both mp4s.
+  const [isMobile, setIsMobile] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setIsMobile(window.matchMedia("(max-width: 767px)").matches);
+  }, []);
+
+  return (
+    <>
+      <img
+        src="/hero-desktop-poster.jpg"
+        alt=""
+        aria-hidden
+        className="absolute inset-0 hidden h-full w-full object-cover md:block"
+      />
+      <img
+        src="/hero-mobile-poster.jpg"
+        alt=""
+        aria-hidden
+        className="absolute inset-0 block h-full w-full object-cover md:hidden"
+      />
+      {isMobile !== null && (
+        <video
+          className="absolute inset-0 h-full w-full object-cover"
+          src={isMobile ? heroMobile : heroDesktop}
+          poster={isMobile ? "/hero-mobile-poster.jpg" : "/hero-desktop-poster.jpg"}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
+      )}
+    </>
+  );
+}
+
 function Hero() {
   return (
     <section id="top" className="relative">
       {/* Full-bleed video, rounded only on the BOTTOM, no side padding */}
       <div className="relative overflow-hidden rounded-b-[28px] md:rounded-b-[48px]">
         <div className="relative aspect-[3/4] w-full md:aspect-[16/9]">
-          <video
-            className="absolute inset-0 hidden h-full w-full object-cover md:block"
-            src={heroDesktop}
-            poster="/hero-desktop-poster.jpg"
-            autoPlay muted loop playsInline preload="auto"
-          />
-          <video
-            className="absolute inset-0 block h-full w-full object-cover md:hidden"
-            src={heroMobile}
-            poster="/hero-mobile-poster.jpg"
-            autoPlay muted loop playsInline preload="auto"
-          />
+          <HeroVideo />
 
           {/* Subtle dim so text stays legible */}
           <div className="pointer-events-none absolute inset-0 bg-black/25" />
@@ -205,7 +241,7 @@ function Hero() {
 function Marquee() {
   const doubled = [...marqueeItems, ...marqueeItems];
   return (
-    <div className="mt-20 border-y border-ink bg-ink py-5 md:mt-28">
+    <div className="mt-12 border-y border-ink bg-ink py-5 md:mt-16">
       <div className="relative overflow-hidden">
         <div className="marquee-track flex w-max gap-10 whitespace-nowrap font-display text-2xl md:text-3xl">
           {doubled.map((item, i) => (
@@ -220,39 +256,81 @@ function Marquee() {
   );
 }
 
-/* ---------- SERVICES: redesigned as bento + interactive list ---------- */
+/* ---------- IL METODO — timeline con freccia, subito dopo l'hero ---------- */
 
 function Method() {
   return (
-    <section id="metodo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
-      <SectionLabel>/ Il metodo</SectionLabel>
+    <section id="metodo" className="relative mx-auto w-[min(96%,1280px)] pt-16 pb-2 md:pt-24 md:pb-6">
+      <SectionGhostNumber n="01" />
+      <SectionLabel>/ 01 — Come lavoriamo</SectionLabel>
       <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
         Niente fumo. <span className="font-serif-i">Quattro passi</span>, sempre gli stessi.
       </h2>
 
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {methodSteps.map((s, i) => (
-          <Reveal key={s.n} delay={i * 90}>
-            <div
-              className={`flex h-full flex-col rounded-3xl border p-6 md:p-7 ${
-                s.dark
-                  ? "border-ink bg-ink text-background"
-                  : "border-border bg-card text-ink"
-              }`}
-            >
-              <span className="grid h-11 w-11 place-items-center rounded-2xl bg-lime font-display text-lg text-ink">
-                {s.n}
-              </span>
-              <h3 className="mt-6 font-display text-xl md:text-2xl">{s.title}</h3>
-              <p className={`mt-3 flex-1 text-sm leading-relaxed ${s.dark ? "text-white/70" : "text-ink-soft"}`}>
-                {s.body}
-              </p>
-              <div className="mt-8 text-xs font-semibold uppercase tracking-wider text-lime-deep">
-                {s.meta}
-              </div>
-            </div>
-          </Reveal>
-        ))}
+      {/* Mobile: compact vertical timeline — all 4 steps in one screen, arrow shows the path */}
+      <div className="relative mt-10 lg:hidden">
+        <div
+          aria-hidden
+          className="absolute bottom-8 left-[21px] top-3 w-0 border-l-2 border-dashed border-lime-deep/50"
+        />
+        <svg
+          aria-hidden
+          viewBox="0 0 12 12"
+          className="absolute bottom-4 left-[21px] h-3.5 w-3.5 -translate-x-1/2 fill-lime-deep"
+        >
+          <path d="M6 12 0 2h12z" />
+        </svg>
+        <ol className="space-y-6 pb-10">
+          {methodSteps.map((s, i) => (
+            <li key={s.n}>
+              <Reveal delay={i * 80} className="relative flex gap-4">
+                <span className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lime font-display text-base text-ink ring-4 ring-background">
+                  {s.n}
+                </span>
+                <div className="pt-0.5">
+                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
+                    <h3 className="font-display text-lg">{s.title}</h3>
+                    <span className="text-[10px] font-semibold uppercase tracking-wider text-lime-deep">
+                      {s.meta}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-sm leading-snug text-ink-soft">{s.body}</p>
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* Desktop: horizontal path with arrow */}
+      <div className="relative mt-14 hidden pb-4 lg:block">
+        <div
+          aria-hidden
+          className="absolute left-1 right-4 top-[22px] border-t-2 border-dashed border-lime-deep/40"
+        />
+        <svg
+          aria-hidden
+          viewBox="0 0 12 12"
+          className="absolute right-1 top-[22px] h-3.5 w-3.5 -translate-y-1/2 fill-lime-deep"
+        >
+          <path d="M12 6 2 0v12z" />
+        </svg>
+        <ol className="grid grid-cols-4 gap-8">
+          {methodSteps.map((s, i) => (
+            <li key={s.n} className="relative">
+              <Reveal delay={i * 90}>
+                <span className="relative z-10 inline-grid h-11 w-11 place-items-center rounded-full bg-lime font-display text-lg text-ink ring-8 ring-background">
+                  {s.n}
+                </span>
+                <h3 className="mt-5 font-display text-xl xl:text-2xl">{s.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.body}</p>
+                <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-lime-deep">
+                  {s.meta}
+                </div>
+              </Reveal>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
   );
@@ -281,16 +359,16 @@ function SectionGhostNumber({ n }: { n: string }) {
 /* ---------- PRIMA & DOPO — interactive slider ---------- */
 
 const primaDopoHighlights = [
-  { icon: Calendar, label: "Prenotazione online" },
-  { icon: Tag, label: "Prezzi sempre visibili" },
-  { icon: Search, label: "+180% chiamate da Google" },
+  { icon: Calendar, stat: "24/7", label: "Prenotazione online", note: "il sito prende appuntamenti anche quando dormi" },
+  { icon: Tag, stat: "0", label: "Prezzi nascosti", note: "tutto chiaro, prima ancora della chiamata" },
+  { icon: Search, stat: "+180%", label: "Chiamate da Google", note: "misurato sui clienti dopo il restyling" },
 ];
 
 function PrimaDopo() {
   return (
     <section id="prima-dopo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
-      <SectionGhostNumber n="02" />
-      <SectionLabel>/ 02 — Prima & Dopo</SectionLabel>
+      <SectionGhostNumber n="03" />
+      <SectionLabel>/ 03 — Prima & Dopo</SectionLabel>
       <h2 className="mt-5 max-w-3xl font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
         Stessa attività.{" "}
         <span className="font-serif-i">Un altro mondo</span> su Google.
@@ -318,7 +396,7 @@ function PrimaDopo() {
             <Link
               to="/lavori"
               id="lavori-cta"
-              className="inline-flex items-center gap-2 rounded-full bg-lime px-6 py-3 text-sm font-semibold text-ink shadow-[0_10px_30px_-10px_var(--lime-deep)] transition hover:bg-lime-deep"
+              className="animate-cta-bounce inline-flex items-center gap-2 rounded-full bg-lime px-8 py-4 text-base font-semibold text-ink shadow-[0_14px_35px_-10px_var(--lime-deep)] transition hover:bg-lime-deep md:px-6 md:py-3 md:text-sm"
             >
               Visualizza tutti i nostri lavori
               <span aria-hidden>→</span>
@@ -327,23 +405,24 @@ function PrimaDopo() {
 
         </div>
 
-        <div className="flex flex-col justify-between rounded-3xl bg-ink p-8 text-background md:p-10">
+        {/* "Cosa cambia" — desktop only, numbers speak */}
+        <div className="hidden flex-col justify-between rounded-3xl bg-ink p-8 text-background lg:flex xl:p-10">
           <div>
             <p className="text-xs uppercase tracking-[0.16em] text-lime">Cosa cambia</p>
-            <h3 className="mt-3 font-display text-3xl leading-tight md:text-4xl">
+            <h3 className="mt-3 font-display text-3xl leading-tight xl:text-4xl">
               Non un sito più bello. <span className="font-serif-i">Un sito che lavora.</span>
             </h3>
 
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-8 divide-y divide-white/10">
               {primaDopoHighlights.map((h) => (
-                <li
-                  key={h.label}
-                  className="flex items-center gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"
-                >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
-                    <h.icon className="h-3.5 w-3.5" />
+                <li key={h.label} className="flex items-center gap-5 py-5">
+                  <span className="w-24 shrink-0 font-display text-3xl text-lime xl:text-4xl">
+                    {h.stat}
                   </span>
-                  <span className="text-sm md:text-base">{h.label}</span>
+                  <div>
+                    <p className="text-sm font-semibold xl:text-base">{h.label}</p>
+                    <p className="mt-0.5 text-xs text-white/60 xl:text-sm">{h.note}</p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -367,8 +446,8 @@ function PrimaDopo() {
 function MilionDollar() {
   return (
     <section className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
-      <SectionGhostNumber n="03" />
-      <SectionLabel>/ 03 — La domanda da un milione</SectionLabel>
+      <SectionGhostNumber n="05" />
+      <SectionLabel>/ 05 — La domanda da un milione</SectionLabel>
       <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
         <span className="font-serif-i">Da chi</span> andresti?
       </h2>
@@ -411,10 +490,10 @@ function Faq({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <SectionGhostNumber n="04" />
+      <SectionGhostNumber n="06" />
       <div className="grid gap-14 lg:grid-cols-[380px_1fr] lg:gap-20">
         <div>
-          <SectionLabel>/ 04 — FAQ</SectionLabel>
+          <SectionLabel>/ 06 — FAQ</SectionLabel>
           <h2 className="mt-5 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.02]">
             Domande <span className="font-serif-i">che ci fanno</span> sempre.
           </h2>
@@ -480,7 +559,7 @@ function Contact() {
         <div className="relative">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-white/80">
             <span className="h-1.5 w-1.5 rounded-full bg-lime" />
-            / 05 — Parliamone
+            / 07 — Parliamone
           </div>
 
           <h2 className="mt-6 max-w-3xl font-display text-[clamp(2.2rem,6vw,5rem)] leading-[1.02]">
