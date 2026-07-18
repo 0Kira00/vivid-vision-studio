@@ -46,7 +46,7 @@ function CellHead({ s, onDark = false }: { s: Service; onDark?: boolean }) {
       <span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink md:h-10 md:w-10">
         <s.icon className="h-4 w-4 md:h-5 md:w-5" />
       </span>
-      <span className={`text-xs font-bold ${onDark ? "text-lime" : "text-lime-text"}`}>
+      <span className={`text-xs font-bold ${onDark ? "text-lime" : "text-ink-soft"}`}>
         {s.number}
       </span>
     </div>
@@ -68,7 +68,10 @@ export function ServicesBento() {
           <br />
           <span className="font-serif-i">Un unico obiettivo:</span>
           <br />
-          <span className="text-lime-text">renderti visibile.</span>
+          <span className="relative inline-block">
+            <span className="relative z-10 px-2 text-ink">renderti visibile.</span>
+            <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
+          </span>
         </h2>
         <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
           Ogni cella ha un ruolo: sito, scheda Google, foto e recensioni lavorano insieme.
@@ -93,7 +96,7 @@ export function ServicesBento() {
                   Prezzi visibili
                 </span>
               </div>
-              <span className="font-display text-xl font-semibold text-lime-text md:text-2xl">
+              <span className="rounded-full bg-lime px-3.5 py-1.5 font-display text-base font-semibold text-ink md:text-xl">
                 {sito.metric}
               </span>
             </div>
@@ -119,7 +122,7 @@ export function ServicesBento() {
             <CellHead s={foto} />
             <h3 className="mb-2 font-display text-lg md:text-2xl">{foto.title}</h3>
             <p className="mb-4 text-xs text-ink-soft md:text-sm">{foto.description}</p>
-            <span className="font-display text-lg font-semibold text-lime-text md:text-xl">
+            <span className="inline-block rounded-full bg-lime px-3 py-1 font-display text-sm font-semibold text-ink md:text-base">
               {foto.metric}
             </span>
           </div>
@@ -129,7 +132,7 @@ export function ServicesBento() {
             <CellHead s={recensioni} />
             <h3 className="mb-2 font-display text-lg md:text-2xl">{recensioni.title}</h3>
             <p className="mb-4 text-xs text-ink-soft md:text-sm">{recensioni.description}</p>
-            <span className="font-display text-lg font-semibold text-lime-text md:text-xl">
+            <span className="inline-block rounded-full bg-lime px-3 py-1 font-display text-sm font-semibold text-ink md:text-base">
               {recensioni.metric}
             </span>
           </div>

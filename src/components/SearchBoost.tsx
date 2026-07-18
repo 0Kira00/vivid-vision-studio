@@ -17,6 +17,12 @@ const steps = [
 ];
 
 export function SearchBoost() {
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.matchMedia("(min-width: 1024px)").matches);
+  }, []);
+
   return (
     <section id="ricerche" className="relative overflow-hidden bg-muted/40 py-20 md:py-28">
       <div className="mx-auto w-[min(96%,1180px)]">
@@ -27,7 +33,11 @@ export function SearchBoost() {
             / 04 — Ogni ricerca, una vetrina
           </span>
           <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-            Come funziona, <span className="font-serif-i text-lime-text">passo per passo.</span>
+            Come funziona,{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10 px-2 font-serif-i text-ink">passo per passo.</span>
+              <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
+            </span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
             Il 76% delle ricerche locali si trasforma in una visita o una chiamata entro 24 ore.
@@ -36,20 +46,34 @@ export function SearchBoost() {
         </div>
 
         <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:items-center">
-          {/* Demo */}
-          <div>
+          {/* Demo — su desktop entra dal centro e si "parcheggia" a sinistra */}
+          <motion.div
+            key={isDesktop ? "demo-desk" : "demo-mob"}
+            initial={isDesktop ? { x: "52%" } : undefined}
+            whileInView={isDesktop ? { x: "0%" } : undefined}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            className="relative z-10"
+          >
             <LocalPackDemo />
-          </div>
+          </motion.div>
 
-          {/* Explanation */}
-          <div>
+          {/* Explanation — appare nello spazio liberato dalla mappa */}
+          <motion.div
+            key={isDesktop ? "steps-desk" : "steps-mob"}
+            initial={isDesktop ? { opacity: 0, x: 90 } : undefined}
+            whileInView={isDesktop ? { opacity: 1, x: 0 } : undefined}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
+          >
             <ol className="space-y-4 md:space-y-5">
               {steps.map((s, i) => (
                 <motion.li
                   key={s.title}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.15 + i * 0.15, duration: 0.5 }}
+                  initial={isDesktop ? false : { opacity: 0, x: 24 }}
+                  whileInView={isDesktop ? undefined : { opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.35 }}
+                  transition={{ delay: i * 0.12, duration: 0.45 }}
                   className="flex gap-4 rounded-2xl border border-border bg-card p-4 md:gap-5 md:p-6"
                 >
                   <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl md:h-14 md:w-14 ${s.bg}`}>
@@ -65,8 +89,7 @@ export function SearchBoost() {
                 </motion.li>
               ))}
             </ol>
-
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

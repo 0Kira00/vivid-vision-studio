@@ -352,7 +352,10 @@ function PrimaDopo() {
       <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
         Stessa attività.{" "}
         <span className="font-serif-i">Un altro mondo</span>{" "}
-        <span className="text-lime-text">su Google</span>.
+        <span className="relative inline-block">
+          <span className="relative z-10 px-2 text-ink">su Google</span>
+          <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
+        </span>.
       </h2>
       <p className="mx-auto mt-5 max-w-xl text-center text-ink-soft">
         Trascina la maniglia per vedere il cambio: sito vecchio, foto sbiadite → un
@@ -429,7 +432,11 @@ function MilionDollar() {
     <section className="relative mx-auto w-[min(96%,1280px)] py-16 md:py-24">
       <SectionLabel>/ 05 — La domanda da un milione</SectionLabel>
       <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-        <span className="font-serif-i">Da chi</span> <span className="text-lime-text">andresti</span>?
+        <span className="font-serif-i">Da chi</span>{" "}
+        <span className="relative inline-block">
+          <span className="relative z-10 px-2 text-ink">andresti</span>
+          <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
+        </span>?
       </h2>
       <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
         Bastano 3 secondi perché un cliente decida chi chiamare e chi ignorare.
@@ -463,7 +470,7 @@ function Faq({
   };
 
   return (
-    <section id="faq" className="relative bg-muted/40 py-20 md:py-24">
+    <section id="faq" className="relative py-20 md:py-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -534,9 +541,9 @@ function Contact() {
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 h-80 w-80 rounded-full bg-lime-deep opacity-20 blur-3xl" />
 
         <div className="relative">
-          <div className="inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink">
-            <span className="h-1.5 w-1.5 rounded-full bg-ink" />
-            / 07 — Parliamone
+          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-white/80">
+            <span className="h-1.5 w-1.5 rounded-full bg-lime" />
+            Parliamone
           </div>
 
           <h2 className="mt-6 max-w-3xl font-display text-[clamp(2.2rem,6vw,5rem)] leading-[1.02]">
