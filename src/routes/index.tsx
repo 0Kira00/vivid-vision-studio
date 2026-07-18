@@ -266,7 +266,7 @@ function Marquee() {
 
 function Method() {
   return (
-    <section id="metodo" className="relative pt-16 pb-10 md:pt-24 md:pb-14">
+    <section id="metodo" className="relative bg-muted/40 pt-16 pb-10 md:pt-24 md:pb-14">
       <div className="mx-auto w-[min(96%,1280px)]">
         <SectionLabel>/ 01 — Come lavoriamo</SectionLabel>
         <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
@@ -327,11 +327,11 @@ function SectionLabel({
 }) {
   return (
     <div
-      className={`flex w-fit items-center gap-2 rounded-full bg-lime px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-14px_var(--lime-deep)] ${
+      className={`flex w-fit items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-ink-soft ${
         align === "center" ? "mx-auto" : ""
       }`}
     >
-      <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+      <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
       {children}
     </div>
   );
@@ -347,7 +347,8 @@ const primaDopoHighlights = [
 
 function PrimaDopo() {
   return (
-    <section id="prima-dopo" className="relative mx-auto w-[min(96%,1280px)] pt-12 pb-20 md:pt-16 md:pb-24">
+    <section id="prima-dopo" className="relative bg-muted/40 pt-12 pb-20 md:pt-16 md:pb-24">
+      <div className="mx-auto w-[min(96%,1280px)]">
       <SectionLabel>/ 03 — Prima & Dopo</SectionLabel>
       <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
         Stessa attività.{" "}
@@ -421,6 +422,7 @@ function PrimaDopo() {
           </a>
         </div>
       </div>
+      </div>
     </section>
   );
 }
@@ -429,7 +431,8 @@ function PrimaDopo() {
 
 function MilionDollar() {
   return (
-    <section className="relative mx-auto w-[min(96%,1280px)] py-16 md:py-24">
+    <section className="relative bg-muted/40 py-16 md:py-24">
+      <div className="mx-auto w-[min(96%,1280px)]">
       <SectionLabel>/ 05 — La domanda da un milione</SectionLabel>
       <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
         <span className="font-serif-i">Da chi</span>{" "}
@@ -445,6 +448,7 @@ function MilionDollar() {
 
       <div className="mt-12 md:mt-16">
         <ProfessionCompare />
+      </div>
       </div>
     </section>
   );
@@ -470,7 +474,7 @@ function Faq({
   };
 
   return (
-    <section id="faq" className="relative py-20 md:py-24">
+    <section id="faq" className="relative pt-20 pb-8 md:pt-24 md:pb-10">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
@@ -535,7 +539,7 @@ function Faq({
 
 function Contact() {
   return (
-    <section id="contatti" className="mx-auto w-[min(96%,1280px)] pb-24 pt-8">
+    <section id="contatti" className="mx-auto w-[min(96%,1280px)] pb-24 pt-0">
       <div className="relative overflow-hidden rounded-[32px] bg-ink p-8 text-background md:p-16">
         <div aria-hidden className="pointer-events-none absolute -right-32 -top-32 h-96 w-96 rounded-full bg-lime opacity-30 blur-3xl" />
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 h-80 w-80 rounded-full bg-lime-deep opacity-20 blur-3xl" />

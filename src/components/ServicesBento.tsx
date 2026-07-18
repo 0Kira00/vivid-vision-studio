@@ -57,10 +57,10 @@ export function ServicesBento() {
   const [sito, google, foto, recensioni] = services;
 
   return (
-    <section id="cosa-facciamo" className="relative bg-muted/40 py-16 md:py-20">
+    <section id="cosa-facciamo" className="relative py-16 md:py-20">
       <div className="mx-auto w-[min(96%,1280px)]">
-        <div className="mx-auto flex w-fit items-center gap-2 rounded-full bg-lime px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-14px_var(--lime-deep)]">
-          <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+        <div className="mx-auto flex w-fit items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-ink-soft">
+          <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
           / 02 — I nostri servizi
         </div>
         <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.05]">
