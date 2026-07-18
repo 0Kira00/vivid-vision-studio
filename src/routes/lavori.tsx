@@ -10,7 +10,6 @@ import {
 import site1After from "@/assets/site1-after.jpg";
 import site2After from "@/assets/site2-after.jpg";
 import site3After from "@/assets/site3-after.jpg";
-import { Reveal } from "@/components/Reveal";
 import { SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/lavori")({
@@ -89,35 +88,37 @@ function Lavori() {
 
       <section className="mx-auto w-[min(96%,1280px)] pb-24 md:pb-32">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {works.map((w, i) => (
-            <Reveal key={w.category} delay={i * 70}>
-              <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-[0_20px_60px_-40px_rgba(0,0,0,0.3)] transition hover:-translate-y-1">
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-                  {w.image ? (
-                    <img
-                      src={w.image}
-                      alt={`Sito web per ${w.client}, categoria ${w.category}, realizzato da Visibilia`}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-lime-soft via-lime to-lime-deep">
-                      <w.icon className="h-14 w-14 text-ink/70" strokeWidth={1.25} />
-                    </div>
-                  )}
-                  <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/85 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
-                    <w.icon className="h-3 w-3" />
-                    {w.category}
+          {works.map((w) => (
+            <div
+              key={w.category}
+              className="group overflow-hidden rounded-3xl border border-border bg-card shadow-[0_20px_60px_-40px_rgba(0,0,0,0.3)] transition hover:-translate-y-1"
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
+                {w.image ? (
+                  <img
+                    src={w.image}
+                    alt={`Sito web per ${w.client}, categoria ${w.category}, realizzato da Visibilia`}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-lime-soft via-lime to-lime-deep">
+                    <w.icon className="h-14 w-14 text-ink/70" strokeWidth={1.25} />
                   </div>
-                </div>
-                <div className="p-5">
-                  <div className="font-display text-xl">{w.client}</div>
-                  <p className="mt-1 text-sm text-ink-soft">
-                    {w.image ? "Progetto realizzato da Visibilia" : "Esempio · presto online"}
-                  </p>
+                )}
+                <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-ink/85 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
+                  <w.icon className="h-3 w-3" />
+                  {w.category}
                 </div>
               </div>
-            </Reveal>
+              <div className="p-5">
+                <div className="font-display text-xl">{w.client}</div>
+                <p className="mt-1 text-sm text-ink-soft">
+                  {w.image ? "Progetto realizzato da Visibilia" : "Esempio · presto online"}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
 

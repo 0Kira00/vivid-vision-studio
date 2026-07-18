@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SITE_URL, SITE_NAME } from "../lib/seo";
 import { TabAttention } from "../components/TabAttention";
+import { SmoothScroll } from "../components/SmoothScroll";
 
 function NotFoundComponent() {
   return (
@@ -170,8 +171,10 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <TabAttention />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SmoothScroll>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+      </SmoothScroll>
     </QueryClientProvider>
   );
 }

@@ -1,6 +1,5 @@
 import { Camera, Globe, MapPin, Star } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
 
 interface Service {
   number: string;
@@ -47,7 +46,7 @@ function CellHead({ s, onDark = false }: { s: Service; onDark?: boolean }) {
       <span className="grid h-8 w-8 place-items-center rounded-full bg-lime text-ink md:h-10 md:w-10">
         <s.icon className="h-4 w-4 md:h-5 md:w-5" />
       </span>
-      <span className={`text-xs font-bold ${onDark ? "text-lime" : "text-lime-deep"}`}>
+      <span className={`text-xs font-bold ${onDark ? "text-lime" : "text-lime-text"}`}>
         {s.number}
       </span>
     </div>
@@ -58,30 +57,27 @@ export function ServicesBento() {
   const [sito, google, foto, recensioni] = services;
 
   return (
-    <section id="cosa-facciamo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-28">
-      <span
-        aria-hidden
-        className="pointer-events-none absolute -left-6 top-0 -z-10 hidden select-none font-display text-[240px] leading-none text-ink/[0.04] md:-left-10 md:block md:text-[320px]"
-      >
-        02
-      </span>
+    <section id="cosa-facciamo" className="relative bg-muted/40 py-16 md:py-20">
+      <div className="mx-auto w-[min(96%,1280px)]">
+        <div className="mx-auto flex w-fit items-center gap-2 rounded-full bg-lime px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-14px_var(--lime-deep)]">
+          <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+          / 02 — I nostri servizi
+        </div>
+        <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.05]">
+          Quattro servizi.
+          <br />
+          <span className="font-serif-i">Un unico obiettivo:</span>
+          <br />
+          <span className="text-lime-text">renderti visibile.</span>
+        </h2>
+        <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
+          Ogni cella ha un ruolo: sito, scheda Google, foto e recensioni lavorano insieme.
+        </p>
 
-      <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-ink-soft">
-        <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
-        / 02 — I nostri servizi
-      </div>
-      <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-        Quattro servizi. <span className="font-serif-i">Un unico obiettivo:</span> farti scegliere.
-      </h2>
-      <p className="mt-4 max-w-xl text-ink-soft">
-        Ogni cella ha un ruolo: sito, scheda Google, foto e recensioni lavorano insieme.
-      </p>
-
-      {/* 2 colonne anche su mobile — stessa resa "da iPad" ovunque */}
-      <div className="mt-12 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
-        {/* Grande — Sito web */}
-        <Reveal className="col-span-2 lg:col-span-2">
-          <div className="relative flex h-full min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-5 md:min-h-[320px] md:p-10">
+        {/* 2 colonne anche su mobile — stessa resa "da iPad" ovunque */}
+        <div className="mt-12 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
+          {/* Grande — Sito web */}
+          <div className="col-span-2 relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-5 md:min-h-[320px] md:p-10 lg:col-span-2">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(163,230,53,0.35),transparent_45%)]" />
             <div className="relative z-10">
               <CellHead s={sito} />
@@ -97,16 +93,14 @@ export function ServicesBento() {
                   Prezzi visibili
                 </span>
               </div>
-              <span className="font-display text-xl font-semibold text-lime-deep md:text-2xl">
+              <span className="font-display text-xl font-semibold text-lime-text md:text-2xl">
                 {sito.metric}
               </span>
             </div>
           </div>
-        </Reveal>
 
-        {/* Scura — Google Business */}
-        <Reveal delay={80}>
-          <div className="relative flex h-full min-h-[210px] flex-col justify-between overflow-hidden rounded-3xl bg-ink p-5 text-background md:min-h-[320px] md:p-8">
+          {/* Scura — Google Business */}
+          <div className="relative flex min-h-[210px] flex-col justify-between overflow-hidden rounded-3xl bg-ink p-5 text-background md:min-h-[320px] md:p-8">
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(163,230,53,0.25),transparent_50%)]" />
             <div className="relative z-10">
               <CellHead s={google} onDark />
@@ -119,41 +113,35 @@ export function ServicesBento() {
               </span>
             </div>
           </div>
-        </Reveal>
 
-        {/* Piccola — Foto */}
-        <Reveal delay={140}>
+          {/* Piccola — Foto */}
           <div className="h-full rounded-3xl border border-border bg-card p-5 md:p-8">
             <CellHead s={foto} />
             <h3 className="mb-2 font-display text-lg md:text-2xl">{foto.title}</h3>
             <p className="mb-4 text-xs text-ink-soft md:text-sm">{foto.description}</p>
-            <span className="font-display text-lg font-semibold text-lime-deep md:text-xl">
+            <span className="font-display text-lg font-semibold text-lime-text md:text-xl">
               {foto.metric}
             </span>
           </div>
-        </Reveal>
 
-        {/* Piccola — Recensioni */}
-        <Reveal delay={200}>
+          {/* Piccola — Recensioni */}
           <div className="h-full rounded-3xl border border-border bg-card p-5 md:p-8">
             <CellHead s={recensioni} />
             <h3 className="mb-2 font-display text-lg md:text-2xl">{recensioni.title}</h3>
             <p className="mb-4 text-xs text-ink-soft md:text-sm">{recensioni.description}</p>
-            <span className="font-display text-lg font-semibold text-lime-deep md:text-xl">
+            <span className="font-display text-lg font-semibold text-lime-text md:text-xl">
               {recensioni.metric}
             </span>
           </div>
-        </Reveal>
 
-        {/* Striscia lime — affianca "Recensioni" su mobile, cella singola su desktop */}
-        <Reveal delay={260}>
+          {/* Striscia lime — affianca "Recensioni" su mobile, cella singola su desktop */}
           <div className="flex h-full min-h-[110px] items-center justify-center rounded-3xl bg-lime p-5 text-ink md:p-8">
             <div className="text-center">
               <p className="mb-1 font-display text-xl font-semibold md:text-4xl">Tutto incluso</p>
               <p className="text-xs font-medium md:text-sm">in un unico abbonamento.</p>
             </div>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

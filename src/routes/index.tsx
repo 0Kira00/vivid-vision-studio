@@ -7,7 +7,6 @@ import { BeforeAfterSlider } from "@/components/before-after-slider";
 import site1Before from "@/assets/site1-before.jpg";
 import site1After from "@/assets/site1-after.jpg";
 import { Calendar, Tag, Search } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
 import { ProfessionCompare } from "@/components/ProfessionCompare";
 import { SearchBoost } from "@/components/SearchBoost";
 import { ServicesBento } from "@/components/ServicesBento";
@@ -88,8 +87,10 @@ const marqueeItems = [
   "Oltre 80 clienti soddisfatti 👥",
   "Oltre 250 recensioni verificate ⭐️",
   "Supporto rapido e dedicato ⚡",
+  "Soluzioni personalizzate per ogni attività 🎯",
+  "Report mensile dritto nella tua mail 📬",
+  "Sempre reperibili, quando ti serve 📞",
   "Primi su Google. Punto. 📍",
-  "Risultati veri, misurati ogni mese 📈",
 ];
 
 function Index() {
@@ -202,8 +203,10 @@ function Hero() {
           <div className="relative z-10 flex h-full flex-col justify-end p-6 pb-10 md:p-14 lg:p-20">
             <div className="max-w-5xl">
               <h1 className="font-display text-[clamp(2.6rem,7.5vw,7rem)] leading-[0.95] text-white">
-                Siamo il motivo{" "}
-                <span className="font-serif-i text-white/95">per cui ti scelgono</span>{" "}
+                Siamo il motivo
+                <br />
+                <span className="font-serif-i text-white/95">per cui ti scelgono</span>
+                <br />
                 <span className="relative inline-block">
                   <span className="relative z-10 px-3 text-ink">su Google</span>
                   <span aria-hidden className="absolute inset-0 -skew-y-2 rounded-full bg-lime" />
@@ -212,7 +215,8 @@ function Hero() {
 
               <p className="mt-6 max-w-xl text-base text-white/85 md:text-lg">
                 Costruiamo siti, schede Google e identità digitali per chi ha smesso di essere{" "}
-                <span className="font-serif-i">"il secondo risultato"</span>. Più clic, più chiamate, più clienti.
+                <span className="font-serif-i whitespace-nowrap">"il secondo risultato"</span>. Più clic, più
+                chiamate, più clienti.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -239,14 +243,16 @@ function Hero() {
 }
 
 function Marquee() {
+  // Due copie identiche, spaziatura interna agli item: il loop a -50% riparte
+  // esattamente dove finisce la prima copia — niente flicker.
   const doubled = [...marqueeItems, ...marqueeItems];
   return (
-    <div className="mt-12 border-y border-ink bg-ink py-5 md:mt-16">
+    <div className="mt-12 border-y border-ink bg-ink py-4 md:mt-16 md:py-5">
       <div className="relative overflow-hidden">
-        <div className="marquee-track flex w-max gap-10 whitespace-nowrap font-display text-2xl md:text-3xl">
+        <div className="marquee-track flex w-max whitespace-nowrap font-display text-lg md:text-3xl">
           {doubled.map((item, i) => (
-            <span key={i} className="flex items-center gap-10 text-white/85">
-              {item}
+            <span key={i} className="flex items-center text-white/85">
+              <span className="px-4 md:px-6">{item}</span>
               <span className="text-lime">✦</span>
             </span>
           ))}
@@ -256,129 +262,104 @@ function Marquee() {
   );
 }
 
-/* ---------- IL METODO — timeline con freccia, subito dopo l'hero ---------- */
+/* ---------- IL METODO — timeline centrale con pallini, card alternate ---------- */
 
 function Method() {
   return (
-    <section id="metodo" className="relative mx-auto w-[min(96%,1280px)] pt-16 pb-2 md:pt-24 md:pb-6">
-      <SectionGhostNumber n="01" />
-      <SectionLabel>/ 01 — Come lavoriamo</SectionLabel>
-      <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-        Niente fumo. <span className="font-serif-i">Quattro passi</span>, sempre gli stessi.
-      </h2>
+    <section id="metodo" className="relative pt-16 pb-10 md:pt-24 md:pb-14">
+      <div className="mx-auto w-[min(96%,1280px)]">
+        <SectionLabel>/ 01 — Come lavoriamo</SectionLabel>
+        <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+          Niente fumo. <span className="font-serif-i">Quattro passi</span>, sempre gli stessi.
+        </h2>
 
-      {/* Mobile: compact vertical timeline — all 4 steps in one screen, arrow shows the path */}
-      <div className="relative mt-10 lg:hidden">
-        <div
-          aria-hidden
-          className="absolute bottom-8 left-[21px] top-3 w-0 border-l-2 border-dashed border-lime-deep/50"
-        />
-        <svg
-          aria-hidden
-          viewBox="0 0 12 12"
-          className="absolute bottom-4 left-[21px] h-3.5 w-3.5 -translate-x-1/2 fill-lime-deep"
-        >
-          <path d="M6 12 0 2h12z" />
-        </svg>
-        <ol className="space-y-6 pb-10">
-          {methodSteps.map((s, i) => (
-            <li key={s.n}>
-              <Reveal delay={i * 80} className="relative flex gap-4">
-                <span className="relative z-10 grid h-11 w-11 shrink-0 place-items-center rounded-full bg-lime font-display text-base text-ink ring-4 ring-background">
-                  {s.n}
-                </span>
-                <div className="pt-0.5">
-                  <div className="flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
-                    <h3 className="font-display text-lg">{s.title}</h3>
-                    <span className="text-[10px] font-semibold uppercase tracking-wider text-lime-deep">
-                      {s.meta}
-                    </span>
+        <div className="relative mx-auto mt-12 max-w-4xl md:mt-16">
+          {/* Linea verticale: a sinistra su mobile, centrale su desktop */}
+          <div
+            aria-hidden
+            className="absolute bottom-2 left-[7px] top-2 w-px bg-border md:left-1/2 md:-translate-x-1/2"
+          />
+          <ol className="space-y-8 md:space-y-12">
+            {methodSteps.map((s, i) => {
+              const flip = i % 2 === 1;
+              return (
+                <li key={s.n} className="relative">
+                  {/* pallino sulla linea */}
+                  <span
+                    aria-hidden
+                    className="absolute left-[7px] top-2 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-lime-deep ring-4 ring-background md:left-1/2 md:top-2.5"
+                  />
+                  <div className="pl-8 md:grid md:grid-cols-2 md:items-start md:gap-16 md:pl-0">
+                    {/* pillola con numero e tempi */}
+                    <div className={`md:flex ${flip ? "md:order-2 md:justify-start" : "md:justify-end"}`}>
+                      <span className="inline-flex items-center gap-2 rounded-full bg-lime px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-ink">
+                        {s.n} · {s.meta}
+                      </span>
+                    </div>
+                    {/* titolo + card */}
+                    <div className={`mt-3 md:mt-0 ${flip ? "md:order-1 md:text-right" : ""}`}>
+                      <h3 className="font-display text-xl md:text-2xl">{s.title}</h3>
+                      <div
+                        className={`mt-3 rounded-2xl border border-border bg-card p-4 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.35)] md:p-5 ${
+                          flip ? "md:ml-auto" : ""
+                        } md:max-w-md`}
+                      >
+                        <p className="text-sm leading-relaxed text-ink-soft md:text-base">{s.body}</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="mt-1 text-sm leading-snug text-ink-soft">{s.body}</p>
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      {/* Desktop: horizontal path with arrow */}
-      <div className="relative mt-14 hidden pb-4 lg:block">
-        <div
-          aria-hidden
-          className="absolute left-1 right-4 top-[22px] border-t-2 border-dashed border-lime-deep/40"
-        />
-        <svg
-          aria-hidden
-          viewBox="0 0 12 12"
-          className="absolute right-1 top-[22px] h-3.5 w-3.5 -translate-y-1/2 fill-lime-deep"
-        >
-          <path d="M12 6 2 0v12z" />
-        </svg>
-        <ol className="grid grid-cols-4 gap-8">
-          {methodSteps.map((s, i) => (
-            <li key={s.n} className="relative">
-              <Reveal delay={i * 90}>
-                <span className="relative z-10 inline-grid h-11 w-11 place-items-center rounded-full bg-lime font-display text-lg text-ink ring-8 ring-background">
-                  {s.n}
-                </span>
-                <h3 className="mt-5 font-display text-xl xl:text-2xl">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-soft">{s.body}</p>
-                <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-lime-deep">
-                  {s.meta}
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
       </div>
     </section>
   );
 }
 
-function SectionLabel({ children }: { children: React.ReactNode }) {
+function SectionLabel({
+  children,
+  align = "center",
+}: {
+  children: React.ReactNode;
+  align?: "center" | "left";
+}) {
   return (
-    <div className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-ink-soft">
-      <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
+    <div
+      className={`flex w-fit items-center gap-2 rounded-full bg-lime px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-14px_var(--lime-deep)] ${
+        align === "center" ? "mx-auto" : ""
+      }`}
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-ink" />
       {children}
     </div>
-  );
-}
-
-function SectionGhostNumber({ n }: { n: string }) {
-  return (
-    <span
-      aria-hidden
-      className="pointer-events-none absolute -left-6 top-0 -z-10 hidden select-none font-display text-[240px] leading-none text-ink/[0.04] md:-left-10 md:block md:text-[320px]"
-    >
-      {n}
-    </span>
   );
 }
 
 /* ---------- PRIMA & DOPO — interactive slider ---------- */
 
 const primaDopoHighlights = [
-  { icon: Calendar, stat: "24/7", label: "Prenotazione online", note: "il sito prende appuntamenti anche quando dormi" },
-  { icon: Tag, stat: "0", label: "Prezzi nascosti", note: "tutto chiaro, prima ancora della chiamata" },
-  { icon: Search, stat: "+180%", label: "Chiamate da Google", note: "misurato sui clienti dopo il restyling" },
+  { icon: Calendar, label: "Prenotazione online" },
+  { icon: Tag, label: "Prezzi sempre visibili" },
+  { icon: Search, label: "+180% chiamate da Google" },
 ];
 
 function PrimaDopo() {
   return (
-    <section id="prima-dopo" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
-      <SectionGhostNumber n="03" />
+    <section id="prima-dopo" className="relative mx-auto w-[min(96%,1280px)] pt-12 pb-20 md:pt-16 md:pb-24">
       <SectionLabel>/ 03 — Prima & Dopo</SectionLabel>
-      <h2 className="mt-5 max-w-3xl font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
+      <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
         Stessa attività.{" "}
-        <span className="font-serif-i">Un altro mondo</span> su Google.
+        <span className="font-serif-i">Un altro mondo</span>{" "}
+        <span className="text-lime-text">su Google</span>.
       </h2>
-      <p className="mt-5 max-w-xl text-ink-soft">
+      <p className="mx-auto mt-5 max-w-xl text-center text-ink-soft">
         Trascina la maniglia per vedere il cambio: sito vecchio, foto sbiadite → un
         design che vende da solo.
       </p>
 
-      <div className="mt-14 grid gap-8 lg:grid-cols-[1.6fr_1fr]">
+      <div className="mt-12 grid gap-8 md:mt-14 lg:grid-cols-[1.6fr_1fr]">
         <div className="rounded-3xl border border-border bg-card p-3 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] md:p-4">
           <div className="group relative">
             <BeforeAfterSlider
@@ -405,24 +386,24 @@ function PrimaDopo() {
 
         </div>
 
-        {/* "Cosa cambia" — desktop only, numbers speak */}
+        {/* "Cosa cambia" — solo desktop */}
         <div className="hidden flex-col justify-between rounded-3xl bg-ink p-8 text-background lg:flex xl:p-10">
           <div>
             <p className="text-xs uppercase tracking-[0.16em] text-lime">Cosa cambia</p>
-            <h3 className="mt-3 font-display text-3xl leading-tight xl:text-4xl">
+            <h3 className="mt-3 font-display text-3xl leading-tight">
               Non un sito più bello. <span className="font-serif-i">Un sito che lavora.</span>
             </h3>
 
-            <ul className="mt-8 divide-y divide-white/10">
+            <ul className="mt-8 space-y-4">
               {primaDopoHighlights.map((h) => (
-                <li key={h.label} className="flex items-center gap-5 py-5">
-                  <span className="w-24 shrink-0 font-display text-3xl text-lime xl:text-4xl">
-                    {h.stat}
+                <li
+                  key={h.label}
+                  className="flex items-center gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"
+                >
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
+                    <h.icon className="h-3.5 w-3.5" />
                   </span>
-                  <div>
-                    <p className="text-sm font-semibold xl:text-base">{h.label}</p>
-                    <p className="mt-0.5 text-xs text-white/60 xl:text-sm">{h.note}</p>
-                  </div>
+                  <span className="text-sm md:text-base">{h.label}</span>
                 </li>
               ))}
             </ul>
@@ -445,21 +426,18 @@ function PrimaDopo() {
 
 function MilionDollar() {
   return (
-    <section className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
-      <SectionGhostNumber n="05" />
+    <section className="relative mx-auto w-[min(96%,1280px)] py-16 md:py-24">
       <SectionLabel>/ 05 — La domanda da un milione</SectionLabel>
-      <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-        <span className="font-serif-i">Da chi</span> andresti?
+      <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+        <span className="font-serif-i">Da chi</span> <span className="text-lime-text">andresti</span>?
       </h2>
-      <p className="mt-4 max-w-xl text-ink-soft">
+      <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
         Bastano 3 secondi perché un cliente decida chi chiamare e chi ignorare.
         In quei 3 secondi, la tua scheda deve distinguersi dalla concorrenza.
       </p>
 
-      <div className="mt-16">
-        <Reveal>
-          <ProfessionCompare />
-        </Reveal>
+      <div className="mt-12 md:mt-16">
+        <ProfessionCompare />
       </div>
     </section>
   );
@@ -485,15 +463,14 @@ function Faq({
   };
 
   return (
-    <section id="faq" className="relative mx-auto w-[min(96%,1280px)] py-20 md:py-24">
+    <section id="faq" className="relative bg-muted/40 py-20 md:py-24">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <SectionGhostNumber n="06" />
-      <div className="grid gap-14 lg:grid-cols-[380px_1fr] lg:gap-20">
+      <div className="mx-auto grid w-[min(96%,1280px)] gap-14 lg:grid-cols-[380px_1fr] lg:gap-20">
         <div>
-          <SectionLabel>/ 06 — FAQ</SectionLabel>
+          <SectionLabel align="left">/ 06 — FAQ</SectionLabel>
           <h2 className="mt-5 font-display text-[clamp(2rem,4.5vw,3.5rem)] leading-[1.02]">
             Domande <span className="font-serif-i">che ci fanno</span> sempre.
           </h2>
@@ -557,8 +534,8 @@ function Contact() {
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-20 h-80 w-80 rounded-full bg-lime-deep opacity-20 blur-3xl" />
 
         <div className="relative">
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 text-[11px] uppercase tracking-[0.16em] text-white/80">
-            <span className="h-1.5 w-1.5 rounded-full bg-lime" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-lime px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink">
+            <span className="h-1.5 w-1.5 rounded-full bg-ink" />
             / 07 — Parliamone
           </div>
 

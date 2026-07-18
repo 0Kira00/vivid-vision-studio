@@ -22,14 +22,14 @@ export function SearchBoost() {
       <div className="mx-auto w-[min(96%,1180px)]">
         {/* Section header — same numbered style as the rest of the site */}
         <div className="mb-12 md:mb-16">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-[11px] font-medium uppercase tracking-[0.16em] text-ink-soft">
-            <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
+          <span className="mx-auto flex w-fit items-center gap-2 rounded-full bg-lime px-5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-ink shadow-[0_10px_30px_-14px_var(--lime-deep)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-ink" />
             / 04 — Ogni ricerca, una vetrina
           </span>
-          <h2 className="mt-5 max-w-3xl font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
-            Come funziona, <span className="font-serif-i text-lime-deep">passo per passo.</span>
+          <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+            Come funziona, <span className="font-serif-i text-lime-text">passo per passo.</span>
           </h2>
-          <p className="mt-4 max-w-xl text-ink-soft">
+          <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
             Il 76% delle ricerche locali si trasforma in una visita o una chiamata entro 24 ore.
             Ecco perché essere nei primi 3 risultati vale più di qualsiasi campagna a pagamento.
           </p>
@@ -43,24 +43,24 @@ export function SearchBoost() {
 
           {/* Explanation */}
           <div>
-            <ol className="space-y-4">
+            <ol className="space-y-4 md:space-y-5">
               {steps.map((s, i) => (
                 <motion.li
                   key={s.title}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.15 + i * 0.15, duration: 0.5 }}
-                  className="flex gap-4 rounded-2xl border border-border bg-card p-4"
+                  className="flex gap-4 rounded-2xl border border-border bg-card p-4 md:gap-5 md:p-6"
                 >
-                  <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${s.bg}`}>
-                    <s.icon className={`h-5 w-5 ${s.color}`} />
+                  <div className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl md:h-14 md:w-14 ${s.bg}`}>
+                    <s.icon className={`h-5 w-5 md:h-6 md:w-6 ${s.color}`} />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-ink">
-                      <span className="mr-2 font-mono text-xs text-ink-soft">0{i + 1}</span>
+                    <p className="font-semibold text-ink md:text-lg">
+                      <span className="mr-2 font-mono text-xs text-ink-soft md:text-sm">0{i + 1}</span>
                       {s.title}
                     </p>
-                    <p className="mt-1 text-sm text-ink-soft">{s.body}</p>
+                    <p className="mt-1 text-sm text-ink-soft md:text-base">{s.body}</p>
                   </div>
                 </motion.li>
               ))}

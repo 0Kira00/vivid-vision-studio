@@ -7,10 +7,15 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     if (reducedMotion) return;
 
     const lenis = new Lenis({
-      lerp: 0.12,
+      lerp: 0.11,
       smoothWheel: true,
-      syncTouch: false,
+      // Smooth anche su touch (iPhone incluso)
+      syncTouch: true,
+      syncTouchLerp: 0.08,
+      touchInertiaExponent: 1.7,
       wheelMultiplier: 1,
+      // Gli anchor link (#contatti, #metodo…) scorrono fluidi invece di saltare
+      anchors: { offset: -90 },
     });
     let raf = 0;
     const tick = (time: number) => {

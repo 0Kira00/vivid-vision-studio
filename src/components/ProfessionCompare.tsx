@@ -213,7 +213,7 @@ export function ProfessionCompare() {
         </button>
       </div>
 
-      <h3 className="mt-6 text-center font-display text-2xl leading-tight md:text-3xl">
+      <h3 className="mx-auto mt-6 max-w-xl text-center font-display text-xl leading-tight [text-wrap:balance] sm:text-2xl md:text-3xl">
         {profession.question}
       </h3>
 
