@@ -1,4 +1,4 @@
-import { Camera, Globe, MapPin, Star } from "lucide-react";
+import { Search, Globe, MapPin, Star } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 interface Service {
@@ -26,10 +26,10 @@ const services: Service[] = [
   },
   {
     number: "03",
-    title: "Foto professionali",
-    description: "Scattiamo e selezioniamo le foto che fanno scegliere te al primo sguardo.",
-    metric: "+45% clic",
-    icon: Camera,
+    title: "SEO & Ottimizzazione",
+    description: "Sito veloce, hosting sicuro e ottimizzazione per i motori di ricerca: le fondamenta tecniche che ti fanno trovare.",
+    metric: "Incluso",
+    icon: Search,
   },
   {
     number: "04",

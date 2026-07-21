@@ -192,6 +192,30 @@
   50% { transform: translateY(-6px); }
 }
 
+/* Timeline metodo: tratto lime che scorre lungo la linea */
+@utility timeline-flow {
+  background-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--lime-deep) 40%,
+    var(--lime) 50%,
+    var(--lime-deep) 60%,
+    transparent 100%
+  );
+  background-size: 100% 45%;
+  background-repeat: no-repeat;
+  animation: timeline-flow 3.4s ease-in-out infinite;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    background-image: none;
+  }
+}
+
+@keyframes timeline-flow {
+  0% { background-position: 0 -60%; }
+  100% { background-position: 0 160%; }
+}
+
 /* CTA "Visualizza tutti i nostri lavori": subtle bounce + pulsing lime glow */
 @keyframes cta-bounce {
   0%, 100% { transform: translateY(0) scale(1); }

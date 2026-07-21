@@ -35,26 +35,26 @@ export const Route = createFileRoute("/")({
 const methodSteps = [
   {
     n: "1",
-    title: "Analisi gratuita",
-    body: "Guardiamo come appari su Google oggi: sito, scheda, recensioni, concorrenti.",
+    title: "Chiamata & bozze",
+    body: "Organizziamo una chiamata dove ti mostriamo delle bozze del sito web che abbiamo già costruito per te. Insieme decidiamo quali servizi attivare: dal sito alla scheda Google per farti trovare, fino alla strategia per raccogliere più recensioni.",
     meta: "30 minuti · senza impegno",
   },
   {
     n: "2",
     title: "Fondamenta",
-    body: "Sito veloce e scheda Google ottimizzata: le basi su cui Google ti premia.",
+    body: "Mettiamo a terra le basi: sito veloce, sicuro e curato nei dettagli, scheda Google Business ottimizzata e collegata. Sono gli elementi su cui Google decide chi mostrare per primo nella tua zona.",
     meta: "settimane 1–4",
   },
   {
     n: "3",
     title: "Spinta",
-    body: "Recensioni vere, contenuti locali, foto professionali. La posizione sale.",
+    body: "Attiviamo la crescita: recensioni vere dai tuoi clienti reali, contenuti pensati per il territorio e ottimizzazione continua. Settimana dopo settimana la tua posizione sale e inizi a comparire dove conta.",
     meta: "mesi 2–5",
   },
   {
     n: "4",
     title: "Dominio",
-    body: "Primo nella tua zona. Report mensile con numeri veri: chiamate, visite, richieste.",
+    body: "Diventi il primo riferimento della tua zona e ci resti. Ogni mese ricevi via mail un report con numeri veri — chiamate, visite, richieste — così vedi nero su bianco cosa stiamo costruendo insieme.",
     meta: "dal mese 6 · si mantiene",
   },
 ];
@@ -247,7 +247,7 @@ function Marquee() {
   // esattamente dove finisce la prima copia — niente flicker.
   const doubled = [...marqueeItems, ...marqueeItems];
   return (
-    <div className="mt-12 border-y border-ink bg-ink py-4 md:mt-16 md:py-5">
+    <div className="border-y border-ink bg-ink py-4 md:py-5">
       <div className="relative overflow-hidden">
         <div className="marquee-track flex w-max whitespace-nowrap font-display text-lg md:text-3xl">
           {doubled.map((item, i) => (
@@ -266,7 +266,7 @@ function Marquee() {
 
 function Method() {
   return (
-    <section id="metodo" className="relative bg-muted/40 pt-16 pb-10 md:pt-24 md:pb-14">
+    <section id="metodo" className="relative bg-muted/40 pt-16 pb-24 md:pt-24 md:pb-32">
       <div className="mx-auto w-[min(96%,1280px)]">
         <SectionLabel>/ 01 — Come lavoriamo</SectionLabel>
         <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
@@ -274,37 +274,43 @@ function Method() {
         </h2>
 
         <div className="relative mx-auto mt-12 max-w-4xl md:mt-16">
-          {/* Linea verticale: a sinistra su mobile, centrale su desktop */}
+          {/* Linea verticale: base grigia + tratto lime animato che scende */}
           <div
             aria-hidden
-            className="absolute bottom-2 left-[7px] top-2 w-px bg-border md:left-1/2 md:-translate-x-1/2"
+            className="absolute bottom-2 left-[9px] top-2 w-0.5 rounded-full bg-border md:left-1/2 md:-translate-x-1/2"
           />
-          <ol className="space-y-8 md:space-y-12">
+          <div
+            aria-hidden
+            className="timeline-flow absolute bottom-2 left-[9px] top-2 w-0.5 -translate-x-[0.5px] rounded-full md:left-1/2 md:-translate-x-1/2"
+          />
+          <ol className="space-y-10 md:space-y-14">
             {methodSteps.map((s, i) => {
               const flip = i % 2 === 1;
               return (
                 <li key={s.n} className="relative">
-                  {/* pallino sulla linea */}
+                  {/* pallino sulla linea, col numero dentro */}
                   <span
                     aria-hidden
-                    className="absolute left-[7px] top-2 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-lime-deep ring-4 ring-background md:left-1/2 md:top-2.5"
-                  />
-                  <div className="pl-8 md:grid md:grid-cols-2 md:items-start md:gap-16 md:pl-0">
-                    {/* pillola con numero e tempi */}
+                    className="absolute left-[9px] top-1 grid h-6 w-6 -translate-x-1/2 place-items-center rounded-full bg-lime font-display text-[11px] text-ink ring-4 ring-background md:left-1/2 md:top-1.5 md:h-7 md:w-7 md:text-xs"
+                  >
+                    {s.n}
+                  </span>
+                  <div className="pl-10 md:grid md:grid-cols-2 md:items-start md:gap-16 md:pl-0">
+                    {/* pillola coi tempi */}
                     <div className={`md:flex ${flip ? "md:order-2 md:justify-start" : "md:justify-end"}`}>
                       <span className="inline-flex items-center gap-2 rounded-full bg-lime px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-ink">
-                        {s.n} · {s.meta}
+                        {s.meta}
                       </span>
                     </div>
                     {/* titolo + card */}
-                    <div className={`mt-3 md:mt-0 ${flip ? "md:order-1 md:text-right" : ""}`}>
-                      <h3 className="font-display text-xl md:text-2xl">{s.title}</h3>
+                    <div className={`mt-4 md:mt-0 ${flip ? "md:order-1 md:text-right" : ""}`}>
+                      <h3 className="font-display text-2xl md:text-3xl">{s.title}</h3>
                       <div
-                        className={`mt-3 rounded-2xl border border-border bg-card p-4 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.35)] md:p-5 ${
+                        className={`mt-4 rounded-2xl border border-border bg-card p-5 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.35)] transition-shadow hover:shadow-[0_24px_60px_-30px_rgba(0,0,0,0.4)] md:p-6 ${
                           flip ? "md:ml-auto" : ""
                         } md:max-w-md`}
                       >
-                        <p className="text-sm leading-relaxed text-ink-soft md:text-base">{s.body}</p>
+                        <p className="leading-relaxed text-ink-soft">{s.body}</p>
                       </div>
                     </div>
                   </div>
@@ -434,16 +440,18 @@ function MilionDollar() {
     <section className="relative bg-muted/40 py-16 md:py-24">
       <div className="mx-auto w-[min(96%,1280px)]">
       <SectionLabel>/ 05 — La domanda da un milione</SectionLabel>
-      <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+      <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
         <span className="font-serif-i">Da chi</span>{" "}
         <span className="relative inline-block">
           <span className="relative z-10 px-2 text-ink">andresti</span>
           <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
         </span>?
       </h2>
-      <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
-        Bastano 3 secondi perché un cliente decida chi chiamare e chi ignorare.
-        In quei 3 secondi, la tua scheda deve distinguersi dalla concorrenza.
+      <p className="mx-auto mt-5 max-w-2xl text-center text-ink-soft">
+        Bastano 3 secondi perché un cliente decida chi chiamare e chi ignorare. In quei 3 secondi
+        confronta foto, recensioni e orari di chi gli appare davanti — e quasi sempre sceglie la
+        scheda che sembra più curata e affidabile. Guarda la differenza con i tuoi occhi, categoria
+        per categoria.
       </p>
 
       <div className="mt-12 md:mt-16">

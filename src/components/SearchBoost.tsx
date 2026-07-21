@@ -11,9 +11,9 @@ const competitors = [
 ];
 
 const steps = [
-  { icon: Search, title: "Il cliente digita", body: "«dentista torino» — la ricerca che fa davvero girare il tuo settore.", color: "text-google-blue", bg: "bg-google-blue/10" },
-  { icon: TrendingUp, title: "Tu sali in classifica", body: "Ottimizziamo scheda, recensioni e citazioni: entri nei primi 3.", color: "text-google-green", bg: "bg-google-green/10" },
-  { icon: Sparkles, title: "Arrivano chiamate", body: "Più visibilità = più contatti diretti, senza pagare per click.", color: "text-google-red", bg: "bg-google-red/10" },
+  { icon: Search, title: "Il cliente digita", body: "«dentista torino», «parrucchiere vicino a me»: sono le ricerche che ogni giorno spostano clienti reali da un'attività all'altra, nel tuo settore e nella tua zona.", color: "text-google-blue", bg: "bg-google-blue/10" },
+  { icon: TrendingUp, title: "Tu sali in classifica", body: "Ottimizziamo scheda Google, recensioni e citazioni locali finché non entri nei primi 3 risultati — quelli che compaiono nella mappa e prendono la maggior parte dei clic.", color: "text-google-green", bg: "bg-google-green/10" },
+  { icon: Sparkles, title: "Arrivano le chiamate", body: "Più visibilità significa più contatti diretti: telefonate, richieste di indicazioni e messaggi. Senza pagare un centesimo per ogni click, a differenza della pubblicità.", color: "text-google-red", bg: "bg-google-red/10" },
 ];
 
 export function SearchBoost() {
@@ -32,16 +32,18 @@ export function SearchBoost() {
             <span className="h-1.5 w-1.5 rounded-full bg-lime-deep" />
             / 04 — Ogni ricerca, una vetrina
           </span>
-          <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
+          <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2.4rem,6vw,5rem)] leading-[1.02]">
             Come funziona,{" "}
             <span className="relative inline-block">
               <span className="relative z-10 px-2 font-serif-i text-ink">passo per passo.</span>
               <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
             </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-center text-ink-soft">
-            Il 76% delle ricerche locali si trasforma in una visita o una chiamata entro 24 ore.
-            Ecco perché essere nei primi 3 risultati vale più di qualsiasi campagna a pagamento.
+          <p className="mx-auto mt-5 max-w-2xl text-center text-ink-soft">
+            Il 76% delle ricerche locali si trasforma in una visita o una chiamata entro 24 ore, e
+            quasi tutte si fermano ai primi tre nomi che appaiono sulla mappa. Ecco perché entrare in
+            quel podio vale più di qualsiasi campagna a pagamento: è visibilità che continua a
+            lavorare per te, ogni giorno, senza costo per click.
           </p>
         </div>
 
