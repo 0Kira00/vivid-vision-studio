@@ -208,8 +208,11 @@ function Hero() {
                 <span className="font-serif-i text-white/95">per cui ti scelgono</span>
                 <br />
                 <span className="relative inline-block">
-                  <span className="relative z-10 px-3 text-ink">su Google</span>
-                  <span aria-hidden className="absolute inset-0 -skew-y-2 rounded-full bg-lime" />
+                  <span className="relative z-10 px-3 pb-[0.12em] text-ink">su Google</span>
+                  <span
+                    aria-hidden
+                    className="absolute -inset-x-1 -bottom-[0.18em] -top-[0.1em] -z-0 -skew-y-2 rounded-[0.4em] bg-lime"
+                  />
                 </span>
               </h1>
 
@@ -360,8 +363,11 @@ function PrimaDopo() {
         Stessa attività.{" "}
         <span className="font-serif-i">Un altro mondo</span>{" "}
         <span className="relative inline-block">
-          <span className="relative z-10 px-2 text-ink">su Google</span>
-          <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
+          <span className="relative z-10 px-2 pb-[0.12em] text-ink">su Google</span>
+          <span
+            aria-hidden
+            className="absolute -inset-x-1 -bottom-[0.18em] -top-[0.1em] -z-0 -skew-y-1 rounded-[0.4em] bg-lime"
+          />
         </span>.
       </h2>
       <p className="mx-auto mt-5 max-w-xl text-center text-ink-soft">
