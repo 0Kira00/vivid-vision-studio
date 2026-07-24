@@ -36,7 +36,7 @@ export function SearchBoost() {
             Come funziona,{" "}
             <span className="relative inline-block">
               <span className="relative z-10 px-2 font-serif-i text-ink">passo per passo.</span>
-              <span aria-hidden className="absolute inset-0 skew-y-1 rounded-full bg-lime" />
+              <span aria-hidden className="absolute inset-0 -skew-y-1 rounded-full bg-lime" />
             </span>
           </h2>
           <p className="mx-auto mt-5 max-w-2xl text-center text-ink-soft">

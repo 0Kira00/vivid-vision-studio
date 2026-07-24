@@ -191,7 +191,7 @@ function Hero() {
                   <span className="relative z-10 px-3 text-ink">su Google</span>
                   <span
                     aria-hidden
-                    className="absolute inset-x-0 -bottom-[0.1em] top-0 -skew-y-2 rounded-full bg-lime"
+                    className="absolute inset-x-0 -bottom-[0.1em] top-0 skew-y-2 rounded-full bg-lime"
                   />
                 </span>
               </h1>
