@@ -33,30 +33,10 @@ export const Route = createFileRoute("/")({
 });
 
 const methodSteps = [
-  {
-    n: "1",
-    title: "Chiamata & bozze",
-    body: "Organizziamo una chiamata dove ti mostriamo delle bozze del sito web che abbiamo già costruito per te. Insieme decidiamo quali servizi attivare: dal sito alla scheda Google per farti trovare, fino alla strategia per raccogliere più recensioni.",
-    meta: "30 minuti · senza impegno",
-  },
-  {
-    n: "2",
-    title: "Fondamenta",
-    body: "Mettiamo a terra le basi: sito veloce, sicuro e curato nei dettagli, scheda Google Business ottimizzata e collegata. Sono gli elementi su cui Google decide chi mostrare per primo nella tua zona.",
-    meta: "settimane 1–4",
-  },
-  {
-    n: "3",
-    title: "Spinta",
-    body: "Attiviamo la crescita: recensioni vere dai tuoi clienti reali, contenuti pensati per il territorio e ottimizzazione continua. Settimana dopo settimana la tua posizione sale e inizi a comparire dove conta.",
-    meta: "mesi 2–5",
-  },
-  {
-    n: "4",
-    title: "Dominio",
-    body: "Diventi il primo riferimento della tua zona e ci resti. Ogni mese ricevi via mail un report con numeri veri — chiamate, visite, richieste — così vedi nero su bianco cosa stiamo costruendo insieme.",
-    meta: "dal mese 6 · si mantiene",
-  },
+  { k: "Settimana 1", t: "Analisi gratuita", d: "Guardiamo come appari su Google oggi: sito, scheda, recensioni, concorrenti." },
+  { k: "Settimane 1–4", t: "Fondamenta", d: "Sito veloce e scheda Google ottimizzata. Le basi che Google premia." },
+  { k: "Mesi 2–5", t: "Spinta", d: "Recensioni vere, contenuti locali, foto professionali. La posizione sale." },
+  { k: "Dal mese 6", t: "Dominio", d: "Primo nella tua zona. Report mensile con numeri veri." },
 ];
 
 const faqs = [
@@ -208,10 +188,10 @@ function Hero() {
                 <span className="font-serif-i text-white/95">per cui ti scelgono</span>
                 <br />
                 <span className="relative inline-block">
-                  <span className="relative z-10 px-3 pb-[0.12em] text-ink">su Google</span>
+                  <span className="relative z-10 px-3 text-ink">su Google</span>
                   <span
                     aria-hidden
-                    className="absolute -inset-x-1 -bottom-[0.18em] -top-[0.1em] -z-0 -skew-y-2 rounded-[0.4em] bg-lime"
+                    className="absolute inset-x-0 -bottom-[0.1em] top-0 -skew-y-2 rounded-full bg-lime"
                   />
                 </span>
               </h1>
@@ -270,56 +250,34 @@ function Marquee() {
 function Method() {
   return (
     <section id="metodo" className="relative bg-muted/40 pt-16 pb-24 md:pt-24 md:pb-32">
-      <div className="mx-auto w-[min(96%,1280px)]">
+      <div className="mx-auto w-[min(96%,1180px)]">
         <SectionLabel>/ 01 — Come lavoriamo</SectionLabel>
         <h2 className="mx-auto mt-6 max-w-3xl text-center font-display text-[clamp(2rem,5vw,4rem)] leading-[1.02]">
           Niente fumo. <span className="font-serif-i">Quattro passi</span>, sempre gli stessi.
         </h2>
 
-        <div className="relative mx-auto mt-12 max-w-4xl md:mt-16">
-          {/* Linea verticale: base grigia + tratto lime animato che scende */}
-          <div
-            aria-hidden
-            className="absolute bottom-2 left-[9px] top-2 w-0.5 rounded-full bg-border md:left-1/2 md:-translate-x-1/2"
-          />
-          <div
-            aria-hidden
-            className="timeline-flow absolute bottom-2 left-[9px] top-2 w-0.5 -translate-x-[0.5px] rounded-full md:left-1/2 md:-translate-x-1/2"
-          />
-          <ol className="space-y-10 md:space-y-14">
-            {methodSteps.map((s, i) => {
-              const flip = i % 2 === 1;
-              return (
-                <li key={s.n} className="relative">
-                  {/* pallino sulla linea, col numero dentro */}
-                  <span
-                    aria-hidden
-                    className="absolute left-[9px] top-1 grid h-6 w-6 -translate-x-1/2 place-items-center rounded-full bg-lime font-display text-[11px] text-ink ring-4 ring-background md:left-1/2 md:top-1.5 md:h-7 md:w-7 md:text-xs"
-                  >
-                    {s.n}
-                  </span>
-                  <div className="pl-10 md:grid md:grid-cols-2 md:items-start md:gap-16 md:pl-0">
-                    {/* pillola coi tempi */}
-                    <div className={`md:flex ${flip ? "md:order-2 md:justify-start" : "md:justify-end"}`}>
-                      <span className="inline-flex items-center gap-2 rounded-full bg-lime px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-ink">
-                        {s.meta}
-                      </span>
-                    </div>
-                    {/* titolo + card */}
-                    <div className={`mt-4 md:mt-0 ${flip ? "md:order-1 md:text-right" : ""}`}>
-                      <h3 className="font-display text-2xl md:text-3xl">{s.title}</h3>
-                      <div
-                        className={`mt-4 rounded-2xl border border-border bg-card p-5 shadow-[0_16px_40px_-30px_rgba(0,0,0,0.35)] transition-shadow hover:shadow-[0_24px_60px_-30px_rgba(0,0,0,0.4)] md:p-6 ${
-                          flip ? "md:ml-auto" : ""
-                        } md:max-w-md`}
-                      >
-                        <p className="leading-relaxed text-ink-soft">{s.body}</p>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
+        <div className="relative mx-auto mt-14 max-w-4xl md:mt-20">
+          {/* rail: sfumata in alto, piena in basso */}
+          <div aria-hidden className="grow-rail absolute left-[7px] top-0 w-[2px] md:left-1/2 md:-translate-x-1/2" />
+
+          <ol className="space-y-12 md:space-y-16">
+            {methodSteps.map((s, i) => (
+              <li
+                key={s.t}
+                className={`step-reveal relative pl-10 md:grid md:grid-cols-2 md:gap-14 md:pl-0`}
+                style={{ animationDelay: `${0.2 + i * 0.15}s` }}
+              >
+                <span
+                  aria-hidden
+                  className="absolute left-[7px] top-1.5 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-lime ring-4 ring-background md:left-1/2"
+                />
+                <div className={i % 2 === 1 ? "md:col-start-2" : "md:text-right"}>
+                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-lime-deep">{s.k}</div>
+                  <h3 className="mt-1.5 font-display text-2xl md:text-3xl">{s.t}</h3>
+                  <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">{s.d}</p>
+                </div>
+              </li>
+            ))}
           </ol>
         </div>
       </div>
@@ -363,10 +321,10 @@ function PrimaDopo() {
         Stessa attività.{" "}
         <span className="font-serif-i">Un altro mondo</span>{" "}
         <span className="relative inline-block">
-          <span className="relative z-10 px-2 pb-[0.12em] text-ink">su Google</span>
+          <span className="relative z-10 px-2 text-ink">su Google</span>
           <span
             aria-hidden
-            className="absolute -inset-x-1 -bottom-[0.18em] -top-[0.1em] -z-0 -skew-y-1 rounded-[0.4em] bg-lime"
+            className="absolute inset-x-0 -bottom-[0.1em] top-0 -skew-y-1 rounded-full bg-lime"
           />
         </span>.
       </h2>

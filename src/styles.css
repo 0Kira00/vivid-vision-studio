@@ -127,6 +127,29 @@
   animation: blink 1s step-end infinite;
 }
 
+/* Timeline V.01 — linea che cresce: sfumata in alto, piena in basso */
+@keyframes growRail {
+  from { height: 0; }
+  to { height: 100%; }
+}
+.grow-rail {
+  height: 100%;
+  border-radius: 9999px;
+  background: linear-gradient(to bottom, transparent, var(--lime-deep));
+  animation: growRail 1.6s 0.15s ease-out both;
+}
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.step-reveal {
+  animation: stepIn 0.6s ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .grow-rail { animation: none; height: 100%; }
+  .step-reveal { animation: none; opacity: 1; transform: none; }
+}
+
 @utility animate-caret {
   animation: blink 1s step-end infinite;
 }
