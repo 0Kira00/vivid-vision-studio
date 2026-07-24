@@ -269,11 +269,13 @@ function Method() {
               >
                 <span
                   aria-hidden
-                  className="absolute left-[7px] top-1.5 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-lime ring-2 ring-ink md:left-1/2"
+                  className="absolute left-[7px] top-1.5 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-lime outline outline-2 outline-lime-deep ring-4 ring-background md:left-1/2"
                 />
                 <div className={i % 2 === 1 ? "md:col-start-2" : "md:text-right"}>
-                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink">{s.k}</div>
-                  <h3 className="mt-1.5 font-display text-2xl md:text-3xl">{s.t}</h3>
+                  <div className="text-[11px] font-bold uppercase tracking-[0.16em] text-lime-deep">{s.k}</div>
+                  <h3 className="mt-1.5 font-display text-2xl underline decoration-lime decoration-4 underline-offset-4 md:text-3xl">
+                    {s.t}
+                  </h3>
                   <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-soft md:text-base">{s.d}</p>
                 </div>
               </li>
