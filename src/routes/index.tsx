@@ -6,7 +6,7 @@ import heroMobile from "@/assets/hero-mobile.mp4";
 import { BeforeAfterSlider } from "@/components/before-after-slider";
 import site1Before from "@/assets/site1-before.jpg";
 import site1After from "@/assets/site1-after.jpg";
-import { Calendar, Tag, Search } from "lucide-react";
+import { Globe, ShieldCheck, Server, Scale } from "lucide-react";
 import { ProfessionCompare } from "@/components/ProfessionCompare";
 import { SearchBoost } from "@/components/SearchBoost";
 import { ServicesBento } from "@/components/ServicesBento";
@@ -309,9 +309,26 @@ function SectionLabel({
 /* ---------- PRIMA & DOPO — interactive slider ---------- */
 
 const primaDopoHighlights = [
-  { icon: Calendar, label: "Prenotazione online" },
-  { icon: Tag, label: "Prezzi sempre visibili" },
-  { icon: Search, label: "+180% chiamate da Google" },
+  {
+    icon: Globe,
+    label: "Dominio tuo",
+    body: "Il nome è intestato a te: tuonome.it, registrato e rinnovato a tuo nome, con email professionale inclusa.",
+  },
+  {
+    icon: Server,
+    label: "Hosting e velocità",
+    body: "Server gestito da noi, backup automatici e monitoraggio: il sito resta online e carica in meno di 2 secondi.",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Sicurezza 24/7",
+    body: "Certificato HTTPS, aggiornamenti e protezione anti-attacchi controllati ogni giorno, festivi compresi.",
+  },
+  {
+    icon: Scale,
+    label: "A norma di legge",
+    body: "Cookie banner, privacy policy GDPR, dati aziendali e accessibilità: tutto come richiede la normativa italiana ed europea.",
+  },
 ];
 
 function PrimaDopo() {
@@ -365,21 +382,26 @@ function PrimaDopo() {
         {/* "Cosa cambia" — solo desktop */}
         <div className="hidden flex-col justify-between rounded-3xl bg-ink p-8 text-background lg:flex xl:p-10">
           <div>
-            <p className="text-xs uppercase tracking-[0.16em] text-lime">Cosa cambia</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-lime">Cosa c'è dentro</p>
             <h3 className="mt-3 font-display text-3xl leading-tight">
-              Non un sito più bello. <span className="font-serif-i">Un sito che lavora.</span>
+              Non solo il sito. <span className="font-serif-i">Tutto quello che lo tiene in piedi.</span>
             </h3>
 
-            <ul className="mt-8 space-y-4">
+            <ul className="mt-8 space-y-3">
               {primaDopoHighlights.map((h) => (
                 <li
                   key={h.label}
-                  className="flex items-center gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"
+                  className="flex items-start gap-3 rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
-                    <h.icon className="h-3.5 w-3.5" />
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-lime text-ink">
+                    <h.icon className="h-4 w-4" />
                   </span>
-                  <span className="text-sm md:text-base">{h.label}</span>
+                  <span>
+                    <span className="block text-sm font-semibold md:text-base">{h.label}</span>
+                    <span className="mt-1 block text-xs leading-relaxed text-background/70">
+                      {h.body}
+                    </span>
+                  </span>
                 </li>
               ))}
             </ul>
