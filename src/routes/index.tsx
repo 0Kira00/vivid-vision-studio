@@ -234,7 +234,7 @@ function Marquee() {
       <div className="relative overflow-hidden">
         <div className="marquee-track flex w-max whitespace-nowrap font-display text-lg md:text-3xl">
           {doubled.map((item, i) => (
-            <span key={i} className="flex items-center text-white/85">
+            <span key={i} className="flex shrink-0 items-center text-white/85">
               <span className="px-4 md:px-6">{item}</span>
               <span className="text-lime">✦</span>
             </span>
