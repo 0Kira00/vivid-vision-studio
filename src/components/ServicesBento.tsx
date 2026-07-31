@@ -1,7 +1,7 @@
 import { Search, Globe, MapPin, Star } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import bgSito from "@/assets/bg-sito.png";
-import bgGoogle from "@/assets/bg-google.jpg";
+import bgGoogle from "@/assets/bg-google.png";
 
 interface Service {
   number: string;
