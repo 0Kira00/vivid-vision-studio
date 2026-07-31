@@ -1,5 +1,6 @@
 import { Search, Globe, MapPin, Star } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import bgSito from "@/assets/bg-sito.png";
 
 interface Service {
   number: string;
@@ -81,6 +82,13 @@ export function ServicesBento() {
         <div className="mt-12 grid grid-cols-2 gap-3 md:gap-4 lg:grid-cols-3">
           {/* Grande — Sito web */}
           <div className="col-span-2 relative flex min-h-[220px] flex-col justify-between overflow-hidden rounded-3xl border border-border bg-card p-5 md:min-h-[320px] md:p-10 lg:col-span-2">
+            <img
+              src={bgSito}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-card via-card/85 to-card/40" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(163,230,53,0.35),transparent_45%)]" />
             <div className="relative z-10">
               <CellHead s={sito} />
