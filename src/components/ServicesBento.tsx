@@ -1,6 +1,7 @@
 import { Search, Globe, MapPin, Star } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import bgSito from "@/assets/bg-sito.png";
+import bgGoogle from "@/assets/bg-google.jpg";
 
 interface Service {
   number: string;
@@ -112,6 +113,13 @@ export function ServicesBento() {
 
           {/* Scura — Google Business */}
           <div className="relative flex min-h-[210px] flex-col justify-between overflow-hidden rounded-3xl bg-ink p-5 text-background md:min-h-[320px] md:p-8">
+            <img
+              src={bgGoogle}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-40"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/40" />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(163,230,53,0.25),transparent_50%)]" />
             <div className="relative z-10">
               <CellHead s={google} onDark />
