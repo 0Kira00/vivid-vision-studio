@@ -352,7 +352,7 @@ function PrimaDopo() {
         design che vende da solo.
       </p>
 
-      <div className="mt-12 grid gap-8 md:mt-14 lg:grid-cols-[1.6fr_1fr]">
+      <div className="mt-12 grid gap-8 md:mt-14 lg:grid-cols-[1.6fr_1fr] lg:items-start">
         <div className="rounded-3xl border border-border bg-card p-3 shadow-[0_30px_80px_-40px_rgba(0,0,0,0.35)] md:p-4">
           <div className="group relative">
             <BeforeAfterSlider
@@ -382,7 +382,7 @@ function PrimaDopo() {
         {/* "Cosa cambia" — solo desktop */}
         <div className="hidden flex-col justify-between rounded-3xl bg-ink p-8 text-background lg:flex xl:p-10">
           <div>
-            <p className="text-xs uppercase tracking-[0.16em] text-lime">Cosa c'è dentro</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-lime">Cosa è incluso col sito web</p>
             <h3 className="mt-3 font-display text-3xl leading-tight">
               Non solo il sito. <span className="font-serif-i">Tutto quello che lo tiene in piedi.</span>
             </h3>
