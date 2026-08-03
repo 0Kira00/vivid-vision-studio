@@ -2,6 +2,7 @@ import { Search, Globe, MapPin, Star } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import bgSito from "@/assets/bg-sito.png";
 import bgGoogle from "@/assets/bg-google.png";
+import bgRecensioni from "@/assets/bg-recensioni.png";
 
 interface Service {
   number: string;
@@ -144,13 +145,22 @@ export function ServicesBento() {
           </div>
 
           {/* Piccola — Recensioni */}
-          <div className="h-full rounded-3xl border border-border bg-card p-5 md:p-8">
+          <div className="relative h-full overflow-hidden rounded-3xl border border-border bg-card p-5 md:p-8">
+            <img
+              src={bgRecensioni}
+              alt=""
+              aria-hidden
+              className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-60"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-card via-card/85 to-card/40" />
+            <div className="relative z-10">
             <CellHead s={recensioni} />
             <h3 className="mb-2 font-display text-lg md:text-2xl">{recensioni.title}</h3>
             <p className="mb-4 text-xs text-ink-soft md:text-sm">{recensioni.description}</p>
             <span className="inline-block rounded-full bg-lime px-3 py-1 font-display text-sm font-semibold text-ink md:text-base">
               {recensioni.metric}
             </span>
+            </div>
           </div>
 
           {/* Striscia lime — affianca "Recensioni" su mobile, cella singola su desktop */}
