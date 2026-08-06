@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "vivid-vision-dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "dev", "--port", "5174"],
+      "port": 5174
+    },
+    {
+      "name": "vivid-vision-check",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["vite", "dev", "--port", "5199"],
+      "port": 5199
+    }
+  ]
+}
